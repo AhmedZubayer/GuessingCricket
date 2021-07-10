@@ -2,17 +2,19 @@
 ***Don't run this code here as it is a interactive program. Use other C++ IDE ***
 **Just copy the whole code and paste in the IDE that you use for practice and run it.**
 
-Cricket game....v1.0.3
+** I can assure you that you will love it if you try at least once! **
 
-[Last update: July 10, 2021, FIXED ALL THE BUGS]
+Cricket game....v2.0
 
-This game is mainly based on random numbers! That's why computer's strategy was too poor.(But not now!)
+[Last update: July 10, 2021, Added new feature: Difficulty selector]
+
+This game is mainly based on random numbers!
 
 Challenge yourself and try to beat your previous records!
 
 Have fun playing!
 
-Best wishes to from Zubayer from BANGLADESH!
+Best wishes to you from Zubayer from BANGLADESH!
 
 */
 
@@ -23,18 +25,58 @@ Best wishes to from Zubayer from BANGLADESH!
 #include<ctime>
 using namespace std;
 //Function Declarations
-int quit();
 int intro();
-int toss();
 int howto();
 int about();
-int batting_1st();
-int bowling_1st();
+int quit();
+int lvl_selection();
+int toss_easy();
+int batting_1st_easy();
+int bowing_1st_easy();
+int toss_medium();
+int batting_1st_medium();
+int bowing_1st_medium();
+int toss_hard();
+int batting_1st_hard();
+int bowing_1st_hard();
 //Main Function
 int main(){
     intro();
 }
 //Custom Function
+int intro(){
+system("CLS");
+system("color a");
+cout<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
+cout<<setw(95)<<"Hi there! What's up! \n";
+cout<<setw(98)<<"Welcome back to \"CRICKET\" \n";
+cout<<endl<<endl<<endl;
+cout<<setw(123)<<"***We are recommending you to use your keyboard's Number pad to play this game***"<<endl;
+cout<<setw(110)<<"***Press the corresponding key of each commands***";
+cout<<endl<<endl<<endl<<endl;
+cout<<"\t\t\t\t\t\t\t\t\t1. Start game\n\t\t\t\t\t\t\t\t\t2. How to play\n\t\t\t\t\t\t\t\t\t3. About this game\n\t\t\t\t\t\t\t\t\t4. Quit Game"<<endl<<endl;
+int introinput;
+cout<<"\t\t\t\t\t\t\t\t\t Your input : ";
+cin>>introinput;
+switch(introinput){
+case 1:
+lvl_selection();
+break;
+case 2:
+howto();
+break;
+case 3:
+about();
+break;
+case 4:
+quit();
+break;
+default:
+cout<<endl<<"\t\t\t\t\t\t\t\t  ***Please enter correct number***\n\t\t\t\t\t\t\t\t  Press any key to continue....";
+getch;
+intro();
+}
+}
 int howto(){
 system("CLS");
 system("color f");
@@ -51,7 +93,45 @@ cout<<"\n\n\nPress any key to continue ....";
 getch();
 intro();
 }
-int toss(){
+int quit(){
+system("CLS");
+system("color 0c");
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tAre you sure to quit this game?\n\n\n\t\t\t\t\t\t\t\tPress '1' to Yes or '2' to No.\n\t\t\t\t\t\t\t\tYou are choosing: ";
+int quit1;
+cin>>quit1;
+if (quit1==1)
+        {
+            return 0 ;
+        }
+else{
+
+    intro();
+        }
+}
+int lvl_selection(){
+system("CLS");
+system ("color e");
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\tSelect game level\n";
+cout<<"\n\t\t\t\t\t\t\t\t1. Easy (Opponent Level: Noob)\n\t\t\t\t\t\t\t\t2. Medium (Opponent Level: Pro)\n\t\t\t\t\t\t\t\t3. Hard (Opponent Level: Master)\n"<<endl<<endl;
+cout<<"\t\t\t\t\t\t\t\t\tSelected game level: ";
+int level_selection;
+cin>>level_selection;
+switch (level_selection){
+case 1:
+toss_easy();
+break;
+case 2:
+toss_medium();
+break;
+case 3:
+toss_hard();
+default:
+cout<<endl<<"\t\t\t\t\t\t\t\t  ***Please enter correct number***\n\t\t\t\t\t\t\t\t  Press any key to continue....";
+getch();
+lvl_selection();
+}
+}
+int toss_easy(){
 system("CLS");
 system("color 0d");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t....TOSS....\n";
@@ -78,90 +158,470 @@ int player_chosse;
 cin>>player_chosse;
 switch (player_chosse){
 case 1:
-batting_1st();
+batting_1st_easy();
 case 2:
-bowling_1st();
+bowing_1st_easy();
 default :
 cout<<endl<<endl<<endl<<endl<<"You have pressed the wrong key.\nPress any key to toss again...."<<endl;
 getch();
-toss();
+toss_easy();
 }
 }
 else{
 cout<<endl<<endl<<endl<<endl<<"Sorry, " <<toss_result_declare <<" is the call! Let computer choose between batting and bowling.\nPress any key to continue...."<<endl;
 getch();
-int qwerty;
+int computer_decision;
 string comp_chose;
 srand(time(0));
-qwerty = rand() %2;
-if (qwerty==0){
+computer_decision = rand() %2;
+if (computer_decision==0){
 cout<<endl<<endl<<"Computer has chosen to bat first.\nPress any key to continue...."<<endl;
 getch();
-bowling_1st();
+bowing_1st_easy();
 }
 else{
 cout<<endl<<endl<<"Computer has chosen to bowl first.\nPress any key to continue...."<<endl;
 getch();
-batting_1st();
+batting_1st_easy();
 }
 }
 }else{
 cout<<endl<<endl<<endl<<endl<<"You have pressed the wrong key.\nPress any key to toss again...."<<endl;
 getch();
-toss();
+toss_easy();
 }
 }
-int intro(){
-system("CLS");
-system("color a");
-cout<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
-cout<<setw(95)<<"Hi there! What's up! \n";
-cout<<setw(98)<<"Welcome back to \"CRICKET\" \n";
-cout<<endl<<endl<<endl;
-cout<<setw(123)<<"***We are recommending you to use your keyboard's Number pad to play this game***"<<endl;
-cout<<setw(110)<<"***Press the corresponding key of each commands***";
-cout<<endl<<endl<<endl<<endl;
-cout<<"\t\t\t\t\t\t\t\t\t1. Start game\n\t\t\t\t\t\t\t\t\t2. How to play\n\t\t\t\t\t\t\t\t\t3. About this game\n\t\t\t\t\t\t\t\t\t4. Quit Game"<<endl<<endl;
-int introinput;
-cout<<"\t\t\t\t\t\t\t\t\t Your input : ";
-cin>>introinput;
-switch(introinput){
-case 1:
-toss();
-break;
-case 2:
-howto();
-break;
-case 3:
-about();
-break;
-case 4:
-quit();
-break;
-default:
-cout<<endl<<"\t\t\t\t\t\t\t\t  ***Please enter correct number***\n\t\t\t\t\t\t\t\t  Press any key to continue....";
-getch;
-intro();
-}
-}
-int quit(){
-system("CLS");
-system("color 0c");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tAre you sure to quit this game?\n\n\n\t\t\t\t\t\t\t\tPress '1' to Yes or '2' to No.\n\t\t\t\t\t\t\t\tYou are choosing: ";
-int quit1;
-cin>>quit1;
-if (quit1==1)
-        {
-            return 0 ;
-        }
-else{
-
-    intro();
-        }
-}
-int batting_1st(){
+int batting_1st_easy(){
 //player bat
-int s1, w1, bc1, eb1, ebi1, ceb1,cebi1,over1,over1a,t1;
+int s1, w1, bc1, eb1, ebi1, ceb1,cebi1,over1,over1a,t1,legalbat1;
+s1=0;
+w1=0;
+bc1=0;
+
+do
+    {
+
+                     system("CLS");
+                    system("color 0b");
+                    over1=bc1 / 6;
+                    over1a = bc1 %6;
+
+                    cout<< "\n\n\t1st Innings\n\n\n\t5 overs match, each team has 3 wickets\n\n\tYou are now batting....\n\n\n";
+                    cout<<"\tScoreboard :       "<<s1<<"/"<<w1<<"                            Over-"<<over1<<"."<<over1a;
+                    cout<<"\n\n\n\tJust type your guess. If it matches, you will be out. If not, we will add it to your total!\n\n\n";
+                    cout<<"\t\t\tType your guess here: ";
+                    cin>>eb1;
+                    switch(eb1)
+                            {
+                            case 1:
+                                ebi1=1;
+                                break;
+                            case 2:
+                                ebi1=2;
+                                 break;
+                            case 3:
+                                ebi1=3;
+                                 break;
+                            case 4:
+                                ebi1=4;
+                                 break;
+                            case 6:
+                                ebi1=6;
+                                 break;
+                            default:
+                                legalbat1=0;
+                                ebi1=0;
+                                cout<<"OUT !";
+                                 break;
+                            }
+                    srand(time(0));
+                    ceb1= rand()%5;
+                    switch(ceb1)
+                            {
+                                    case 0:
+                                        cebi1=1;
+                                         break;
+                                     case 1:
+                                        cebi1=2;
+                                         break;
+                                     case 2:
+                                        cebi1=3;
+                                         break;
+                                     case 3:
+                                        cebi1=4;
+                                         break;
+                                     case 4:
+                                        cebi1=6;
+                                         break;
+
+                            }
+
+
+
+                    if(cebi1==ebi1 || legalbat1==0)
+                    {   w1 = w1+1;
+                        cout<<"OUT !";
+                        cout<< "\n\n\nPress any key to continue....";
+                        getch();
+                    }
+
+                    else
+                    {
+                        s1 = s1+ebi1;
+                        cout<< "\n\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress any key to continue....";
+                        getch();
+                    }
+                    bc1++;
+                }   while(bc1<=30 && w1 < 3);
+
+
+
+t1 = s1 +1;
+
+//comp bat
+int s2, w2, bc2, eb2, ebi2, ceb2,cebi2,over2,over2a,legalball1;
+s2=0;
+w2=0;
+bc2=0;
+do {
+                    system("CLS");
+                    system("color 0b");
+                    over2=bc2 / 6;
+                    over2a = bc2 %6;
+
+                    cout<< "\n\n\t2nd Innings\n\n\n\t5 overs match, each team has 3 wickets\n\n\tYou are now bowling....\n\n\n";
+                    cout<<"\tScoreboard :       "    <<   s2      <<    "/"    <<   w2   <<    "                            Over-"     <<   over2    <<"."<<over2a  <<"\t\t\tTarget - "<<t1;
+                    cout<<"\n\n\n\tJust type your guess. If it matches, Computer will be out. If not, we will add computer's score to the total!\n\n\n";
+                    cout<<"\t\t\tType your guess here: ";
+                    cin>>eb2;
+                    srand(time(0));
+                    ceb2= rand()%5;
+                        switch(ceb2)
+                            {
+                                    case 1:
+                                        cebi2=1;
+                                         break;
+                                     case 2:
+                                        cebi2=2;
+                                         break;
+                                     case 3:
+                                        cebi2=3;
+                                         break;
+                                     case 4:
+                                        cebi2=4;
+                                         break;
+                                     case 0:
+                                        cebi2=6;
+                                         break;
+                            }
+                    switch(eb2)
+                            {
+                            case 1:
+                                ebi2=1;
+                                break;
+                            case 2:
+                                ebi2=2;
+                                 break;
+                            case 3:
+                                ebi2=3;
+                                 break;
+                            case 4:
+                                ebi2=4;
+                                 break;
+                            case 6:
+                                ebi2=6;
+                                 break;
+                            default:
+                                legalball1 == 0;
+                                break;
+
+                            }
+
+                    if(cebi2==ebi2)
+                    {   w2=w2+1;
+                        cout<<"OUT !";
+                        cout<< "\n\n\nPress any key to continue....";
+                        getch();
+                        bc2++;
+                    }
+                    else if(legalball1 == 0)
+                        {bc2=bc2;
+                        cout<<"\n\tNo Ball !";
+                        cout<< "\n\tComputer has scored "<<cebi2<<"+1 in this ball\n\n\n\nPress any key to continue....";
+                        getch();
+                        s2 = s2+cebi2+1;}
+                    else
+                    {
+                        s2 = s2+cebi2;
+                        cout<< "\n\tComputer has scored "<<cebi2<<" in this ball\n\n\n\nPress any key to continue....";
+                        getch();
+                        bc2++;
+                    }
+            }while(bc2<=30 && w2<3 && s1>=s2);
+
+
+     if(s1>s2)
+     {  system("CLS");
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tCongratulations, You won the game!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         getch();
+         intro();
+     }
+     else if ( s1 == s2)
+        {    system("CLS");
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t         Match Tied!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         getch();
+             intro();
+        }
+     else
+        {    system("CLS");
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tSorry, Computer won the game!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         getch();
+             intro();
+        }
+
+}
+int bowing_1st_easy(){
+   //comp bat
+   int s3, w3, bc3, eb3, ebi3, ceb3,cebi3,over3,over3a,legalball2;
+s3=0;
+w3=0;
+bc3=0;
+do{
+
+                    system("CLS");
+                    system("color 0b");
+                    over3=bc3 / 6;
+                    over3a = bc3 %6;
+
+                    cout<< "\n\n\t1st Innings\n\n\n\t5 overs match, each team has 3 wickets\n\n\tYou are now bowling....\n\n\n";
+                    cout<<"\tScoreboard :       "    <<   s3      <<    "/"    <<   w3   <<    "                            Over-"     <<   over3    <<"."<<over3a;
+                    cout<<"\n\n\n\tJust type your guess. If it matches, Computer will be out. If not, we will add computer's score to it's score!\n\n\n";
+                    cout<<"\t\t\tType your guess here: ";
+                    cin>>eb3;
+                    srand(time(0));
+                    ceb3= rand()%5;
+                        switch(ceb3)
+                            {
+                                    case 1:
+                                        cebi3=1;
+                                         break;
+                                     case 2:
+                                        cebi3=2;
+                                         break;
+                                     case 3:
+                                        cebi3=3;
+                                         break;
+                                     case 4:
+                                        cebi3=4;
+                                         break;
+                                     case 0:
+                                        cebi3=6;
+                                         break;
+                            }
+                    switch(eb3)
+                            {
+                            case 1:
+                                ebi3=1;
+                                break;
+                            case 2:
+                                ebi3=2;
+                                 break;
+                            case 3:
+                                ebi3=3;
+                                 break;
+                            case 4:
+                                ebi3=4;
+                                 break;
+                            case 6:
+                                ebi3=6;
+                                 break;
+                            default:
+                                legalball2=0;
+                                break;
+                            }
+
+                    if(cebi3==ebi3)
+                    {   w3=w3+1;
+                        cout<<"OUT !";
+                        cout<< "\n\n\nPress any key to continue....";
+                        getch();
+                        bc3++;
+                    }
+                    else if(legalball2==0)
+                        {bc3=bc3;
+                         cout<<"\n\tNo Ball !";
+                         cout<< "\n\tComputer has scored "<<cebi3<<"+1 in this ball\n\n\n\nPress any key to continue....";
+                         getch();
+                         s3= s3+cebi3+1;}
+                    else
+                    {
+                        s3= s3+cebi3;
+                        cout<< "\n\tComputer has scored "<<cebi3<<" in this ball\n\n\n\nPress any key to continue....";
+                        getch();
+                        bc3++;
+                    }
+    }while(bc3<=30 && w3 < 3);
+
+//player bat
+   int s4, w4, bc4, eb4, ebi4, ceb4,cebi4,over4,over4a,t2,legalbat2;
+s4=0;
+w4=0;
+bc4=0;
+t2= s3+1;
+do{
+
+         system("CLS");
+                    system("color 0b");
+                    over4=bc4 / 6;
+                    over4a = bc4 %6;
+
+                    cout<< "\n\n\t2nd Innings\n\n\n\t5 overs match, each team has 3 wickets\n\n\tYou are now batting....\n\n\n";
+                    cout<<"\tScoreboard :       "<<s4<<"/"<<w4<<"                            Over-"<<over4<<"."<<over4a<<"                       Target- "<<t2;
+                    cout<<"\n\n\n\tJust type your guess. If it matches, you will be out. If not, we will add it to your score!\n\n\n";
+                    cout<<"\t\t\tType your guess here: ";
+                    cin>>eb4;
+                    switch(eb4)
+                            {
+                            case 1:
+                                ebi4=1;
+                                break;
+                            case 2:
+                                ebi4=2;
+                                 break;
+                            case 3:
+                                ebi4=3;
+                                 break;
+                            case 4:
+                                ebi4=4;
+                                 break;
+                            case 6:
+                                ebi4=6;
+                                 break;
+                            default:
+                                legalbat2==0;
+                                ebi4=0;
+                                cout<<"OUT !";
+                                 break;
+                            }
+                    srand(time(0));
+                    ceb4= rand()%5;
+                        switch(ceb4)
+                            {
+                                    case 1:
+                                        cebi4=1;
+                                         break;
+                                     case 2:
+                                        cebi4=2;
+                                         break;
+                                     case 3:
+                                        cebi4=3;
+                                         break;
+                                     case 4:
+                                        cebi4=4;
+                                         break;
+                                     case 0:
+                                        cebi4=6;
+                                         break;
+                            }
+
+                    if(cebi4==ebi4 || legalbat2==0)
+                    {   w4 = w4+1;
+                        cout<<"OUT !";
+                        cout<< "\n\n\nPress any key to continue....";
+                        getch();
+                        bc4++;
+                    }
+                    else
+                    {
+                        s4 = s4+ebi4;
+                        cout<< "\n\tYou have scored "<<ebi4<<" in this ball\n\n\n\nPress any key to continue....";
+                        getch();
+                        bc4++;
+                    }
+    }while(bc4<=30 && w4<3 && s3>=s4);
+
+
+                    if(s4>s3)
+     {  system("CLS");
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tCongratulations, You won the game!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         getch();
+         intro();
+     }else if ( s3 == s4)
+        {    system("CLS");
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t         Match Tied!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         getch();
+             intro();
+        }
+     else
+        {    system("CLS");
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tSorry, Computer won the game!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         getch();
+             intro();
+        }
+}
+int toss_medium(){
+system("CLS");
+system("color 0d");
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t....TOSS....\n";
+cout<< "\n\n\n\t\t\t\t\t\t\tChoose between Head and Tail."<<endl;
+cout<< "\n\n\n\t\t\t\t\t\t\tType H/h for head and T/t for tail. \n\t\t\t\t\t\t\tYou are choosing: ";
+char player_toss;
+char toss_result;
+int toss_initial;
+string toss_result_declare;
+cin>> player_toss;
+player_toss=toupper(player_toss);
+if(player_toss == 'H' || player_toss == 'T'){
+srand(time(0));
+toss_initial = (rand() %2) ;
+if (toss_initial==0)
+{ toss_result= 'H';
+toss_result_declare = "Head";}
+else
+{toss_result = 'T';
+toss_result_declare = "Tail";}
+if (player_toss==toss_result)
+{ cout<<endl<<endl<<endl<<endl<< toss_result_declare<<" is the call! Choose between batting and bowling...\nType '1' for batting and '2' for bowling\nYou are choosing: ";
+int player_chosse;
+cin>>player_chosse;
+switch (player_chosse){
+case 1:
+batting_1st_medium();
+case 2:
+bowing_1st_medium();
+default :
+cout<<endl<<endl<<endl<<endl<<"You have pressed the wrong key.\nPress any key to toss again...."<<endl;
+getch();
+toss_medium();
+}
+}
+else{
+cout<<endl<<endl<<endl<<endl<<"Sorry, " <<toss_result_declare <<" is the call! Let computer choose between batting and bowling.\nPress any key to continue...."<<endl;
+getch();
+int computer_decision;
+string comp_chose;
+srand(time(0));
+computer_decision = rand() %2;
+if (computer_decision==0){
+cout<<endl<<endl<<"Computer has chosen to bat first.\nPress any key to continue...."<<endl;
+getch();
+bowing_1st_medium();
+}
+else{
+cout<<endl<<endl<<"Computer has chosen to bowl first.\nPress any key to continue...."<<endl;
+getch();
+batting_1st_medium();
+}
+}
+}else{
+cout<<endl<<endl<<endl<<endl<<"You have pressed the wrong key.\nPress any key to toss again...."<<endl;
+getch();
+toss_medium();
+}
+}
+int batting_1st_medium(){
+//player bat
+int s1, w1, bc1, eb1, ebi1, ceb1,cebi1,over1,over1a,t1,legalbat1;
 s1=0;
 w1=0;
 bc1=0;
@@ -198,14 +658,14 @@ do
                                  break;
                             default:
                                 ebi1=0;
-                                w1=w1+1;
+                                legalbat1=0;
                                 cout<<"OUT !";
                                  break;
                             }
                     srand(time(0));
-                    ceb1= rand()%3;
+                    ceb1= rand()%5;
                     srand(time(0));
-                    int ceb11 = rand()%2;
+                    int ceb11 = rand()%5;
                      int cebi11;
                         switch(ceb1)
                             {
@@ -218,6 +678,12 @@ do
                                      case 2:
                                         cebi1=3;
                                          break;
+                                    case 3:
+                                        cebi1=4;
+                                         break;
+                                    case 4:
+                                        cebi1=6;
+                                         break;
 
                             }
                    switch(ceb11)
@@ -228,11 +694,20 @@ do
                                      case 1:
                                         cebi11=6;
                                          break;
+                                    case 2:
+                                        cebi11=1;
+                                         break;
+                                    case 3:
+                                        cebi11=2;
+                                         break;
+                                    case 4:
+                                        cebi11=3;
+                                         break;
 
                             }
 
 
-                    if(cebi1==ebi1 || cebi11 ==ebi1)
+                    if(cebi1==ebi1 || cebi11 ==ebi1 || legalbat1==0)
                     {   w1 = w1+1;
                         cout<<"OUT !";
                         cout<< "\n\n\nPress any key to continue....";
@@ -305,7 +780,7 @@ do {
                                 ebi2=6;
                                  break;
                             default:
-                                ebi2=5;
+                                legalball1=0;
                                 break;
 
                             }
@@ -353,9 +828,9 @@ do {
         }
 
 }
-int bowling_1st(){
+int bowing_1st_medium(){
    //comp bat
-   int s3, w3, bc3, eb3, ebi3, ceb3,cebi3,over3,over3a;
+   int s3, w3, bc3, eb3, ebi3, ceb3,cebi3,over3,over3a,legalball2;
 s3=0;
 w3=0;
 bc3=0;
@@ -409,7 +884,7 @@ do{
                                 ebi3=6;
                                  break;
                             default:
-                                ebi3=5;
+                                legalball2=0;
                                 break;
                             }
 
@@ -420,7 +895,7 @@ do{
                         getch();
                         bc3++;
                     }
-                    else if(ebi3==5)
+                    else if(legalball2==0)
                         {bc3=bc3;
                          cout<<"\n\tNo Ball !";
                          cout<< "\n\tComputer has scored "<<cebi3<<"+1 in this ball\n\n\n\nPress any key to continue....";
@@ -435,8 +910,8 @@ do{
                     }
     }while(bc3<=30 && w3 < 3);
 
-    //you bat
-   int s4, w4, bc4, eb4, ebi4, ceb4,cebi4,over4,over4a,t2;
+//player bat
+   int s4, w4, bc4, eb4, ebi4, ceb4,cebi4,over4,over4a,t2,legalbat2;
 s4=0;
 w4=0;
 bc4=0;
@@ -472,7 +947,462 @@ do{
                                  break;
                             default:
                                 ebi4=0;
-                                w4=w4+1;
+                                cout<<"OUT !";
+                                 break;
+                            }
+                    srand(time(0));
+                    ceb4= rand()%5;
+                        switch(ceb4)
+                            {
+                                    case 1:
+                                        cebi4=1;
+                                         break;
+                                     case 2:
+                                        cebi4=2;
+                                         break;
+
+                                     case 0:
+                                        cebi4=3;
+                                         break;
+                                    case 3:
+                                        cebi4=4;
+                                         break;
+                                    case 4:
+                                        cebi4=6;
+                                         break;
+                            }
+                   srand(time(0));
+                    int ceb44=rand()%5;
+                    int cebi44;
+                    switch(ceb44)
+                            {
+                                    case 1:
+                                        cebi44=4;
+                                         break;
+                                     case 0:
+                                        cebi44=6;
+                                         break;
+                                    case 2:
+                                        cebi44=1;
+                                         break;
+                                    case 3:
+                                        cebi44=2;
+                                         break;
+                                    case 4:
+                                        cebi44=3;
+                                         break;
+                            }
+
+
+                    if(cebi4==ebi4 || cebi44==ebi4 || legalbat2==0)
+                    {   w4 = w4+1;
+                        cout<<"OUT !";
+                        cout<< "\n\n\nPress any key to continue....";
+                        getch();
+                        bc4++;
+                    }
+                    else
+                    {
+                        s4 = s4+ebi4;
+                        cout<< "\n\tYou have scored "<<ebi4<<" in this ball\n\n\n\nPress any key to continue....";
+                        getch();
+                        bc4++;
+                    }
+    }while(bc4<=30 && w4<3 && s3>=s4);
+
+
+                    if(s4>s3)
+     {  system("CLS");
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tCongratulations, You won the game!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         getch();
+         intro();
+     }else if ( s3 == s4)
+        {    system("CLS");
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t         Match Tied!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         getch();
+             intro();
+        }
+     else
+        {    system("CLS");
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tSorry, Computer won the game!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         getch();
+             intro();
+        }
+}
+int toss_hard(){
+system("CLS");
+system("color 0d");
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t....TOSS....\n";
+cout<< "\n\n\n\t\t\t\t\t\t\tChoose between Head and Tail."<<endl;
+cout<< "\n\n\n\t\t\t\t\t\t\tType H/h for head and T/t for tail. \n\t\t\t\t\t\t\tYou are choosing: ";
+char player_toss;
+char toss_result;
+int toss_initial;
+string toss_result_declare;
+cin>> player_toss;
+player_toss=toupper(player_toss);
+if(player_toss == 'H' || player_toss == 'T'){
+srand(time(0));
+toss_initial = (rand() %2) ;
+if (toss_initial==0)
+{ toss_result= 'H';
+toss_result_declare = "Head";}
+else
+{toss_result = 'T';
+toss_result_declare = "Tail";}
+if (player_toss==toss_result)
+{ cout<<endl<<endl<<endl<<endl<< toss_result_declare<<" is the call! Choose between batting and bowling...\nType '1' for batting and '2' for bowling\nYou are choosing: ";
+int player_chosse;
+cin>>player_chosse;
+switch (player_chosse){
+case 1:
+batting_1st_hard();
+case 2:
+bowing_1st_hard();
+default :
+cout<<endl<<endl<<endl<<endl<<"You have pressed the wrong key.\nPress any key to toss again...."<<endl;
+getch();
+toss_hard();
+}
+}
+else{
+cout<<endl<<endl<<endl<<endl<<"Sorry, " <<toss_result_declare <<" is the call! Let computer choose between batting and bowling.\nPress any key to continue...."<<endl;
+getch();
+int computer_decision;
+string comp_chose;
+srand(time(0));
+computer_decision = rand() %2;
+if (computer_decision==0){
+cout<<endl<<endl<<"Computer has chosen to bat first.\nPress any key to continue...."<<endl;
+getch();
+bowing_1st_hard();
+}
+else{
+cout<<endl<<endl<<"Computer has chosen to bowl first.\nPress any key to continue...."<<endl;
+getch();
+batting_1st_hard();
+}
+}
+}else{
+cout<<endl<<endl<<endl<<endl<<"You have pressed the wrong key.\nPress any key to toss again...."<<endl;
+getch();
+toss_hard();
+}
+}
+int batting_1st_hard(){
+//player bat
+int s1, w1, bc1, eb1, ebi1, ceb1,cebi1,over1,over1a,t1,legalbat1;
+s1=0;
+w1=0;
+bc1=0;
+
+do
+    {
+
+                     system("CLS");
+                    system("color 0b");
+                    over1=bc1 / 6;
+                    over1a = bc1 %6;
+
+                    cout<< "\n\n\t1st Innings\n\n\n\t5 overs match, each team has 3 wickets\n\n\tYou are now batting....\n\n\n";
+                    cout<<"\tScoreboard :       "<<s1<<"/"<<w1<<"                            Over-"<<over1<<"."<<over1a;
+                    cout<<"\n\n\n\tJust type your guess. If it matches, you will be out. If not, we will add it to your total!\n\n\n";
+                    cout<<"\t\t\tType your guess here: ";
+                    cin>>eb1;
+                    switch(eb1)
+                            {
+                            case 1:
+                                ebi1=1;
+                                break;
+                            case 2:
+                                ebi1=2;
+                                 break;
+                            case 3:
+                                ebi1=3;
+                                 break;
+                            case 4:
+                                ebi1=4;
+                                 break;
+                            case 6:
+                                ebi1=6;
+                                 break;
+                            default:
+                                ebi1=0;
+                                legalbat1=0;
+                                cout<<"OUT !";
+                                 break;
+                            }
+                    srand(time(0));
+                    ceb1= rand()%3;
+                    srand(time(0));
+                    int ceb11 = rand()%2;
+                     int cebi11;
+                        switch(ceb1)
+                            {
+                                    case 0:
+                                        cebi1=1;
+                                         break;
+                                     case 1:
+                                        cebi1=2;
+                                         break;
+                                     case 2:
+                                        cebi1=3;
+                                         break;
+
+                            }
+                   switch(ceb11)
+                            {
+                                    case 0:
+                                        cebi11=4;
+                                         break;
+                                     case 1:
+                                        cebi11=6;
+                                         break;
+
+                            }
+
+
+                    if(cebi1==ebi1 || legalbat1==0)
+                    {   w1 = w1+1;
+                        cout<<"OUT !";
+                        cout<< "\n\n\nPress any key to continue....";
+                        getch();
+                    }
+                    else
+                    {
+                        s1 = s1+ebi1;
+                        cout<< "\n\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress any key to continue....";
+                        getch();
+                    }
+                    bc1++;
+                }   while(bc1<=30 && w1 < 3);
+
+
+
+t1 = s1 +1;
+
+//comp bat
+int s2, w2, bc2, eb2, ebi2, ceb2,cebi2,over2,over2a,legalball1;
+s2=0;
+w2=0;
+bc2=0;
+do {
+                    system("CLS");
+                    system("color 0b");
+                    over2=bc2 / 6;
+                    over2a = bc2 %6;
+
+                    cout<< "\n\n\t2nd Innings\n\n\n\t5 overs match, each team has 3 wickets\n\n\tYou are now bowling....\n\n\n";
+                    cout<<"\tScoreboard :       "    <<   s2      <<    "/"    <<   w2   <<    "                            Over-"     <<   over2    <<"."<<over2a  <<"\t\t\tTarget - "<<t1;
+                    cout<<"\n\n\n\tJust type your guess. If it matches, Computer will be out. If not, we will add computer's score to the total!\n\n\n";
+                    cout<<"\t\t\tType your guess here: ";
+                    cin>>eb2;
+                    srand(time(0));
+                    ceb2= rand()%5;
+                        switch(ceb2)
+                            {
+                                    case 1:
+                                        cebi2=1;
+                                         break;
+                                     case 2:
+                                        cebi2=2;
+                                         break;
+                                     case 3:
+                                        cebi2=3;
+                                         break;
+                                     case 4:
+                                        cebi2=4;
+                                         break;
+                                     case 0:
+                                        cebi2=6;
+                                         break;
+                            }
+                    switch(eb2)
+                            {
+                            case 1:
+                                ebi2=1;
+                                break;
+                            case 2:
+                                ebi2=2;
+                                 break;
+                            case 3:
+                                ebi2=3;
+                                 break;
+                            case 4:
+                                ebi2=4;
+                                 break;
+                            case 6:
+                                ebi2=6;
+                                 break;
+                            default:
+                                legalball1=0;
+                                break;
+
+                            }
+
+                    if(cebi2==ebi2)
+                    {   w2=w2+1;
+                        cout<<"OUT !";
+                        cout<< "\n\n\nPress any key to continue....";
+                        getch();
+                        bc2++;
+                    }
+                    else if(legalball1 == 0)
+                        {bc2=bc2;
+                        cout<<"\n\tNo Ball !";
+                        cout<< "\n\tComputer has scored "<<cebi2<<"+1 in this ball\n\n\n\nPress any key to continue....";
+                        getch();
+                        s2 = s2+cebi2+1;}
+                    else
+                    {
+                        s2 = s2+cebi2;
+                        cout<< "\n\tComputer has scored "<<cebi2<<" in this ball\n\n\n\nPress any key to continue....";
+                        getch();
+                        bc2++;
+                    }
+            }while(bc2<=30 && w2<3 && s1>=s2);
+
+
+     if(s1>s2)
+     {  system("CLS");
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tCongratulations, You won the game!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         getch();
+         intro();
+     }
+     else if ( s1 == s2)
+        {    system("CLS");
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t         Match Tied!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         getch();
+             intro();
+        }
+     else
+        {    system("CLS");
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tSorry, Computer won the game!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         getch();
+             intro();
+        }
+
+}
+int bowing_1st_hard(){
+   //comp bat
+   int s3, w3, bc3, eb3, ebi3, ceb3,cebi3,over3,over3a,legalball2;
+s3=0;
+w3=0;
+bc3=0;
+do{
+
+                    system("CLS");
+                    system("color 0b");
+                    over3=bc3 / 6;
+                    over3a = bc3 %6;
+
+                    cout<< "\n\n\t1st Innings\n\n\n\t5 overs match, each team has 3 wickets\n\n\tYou are now bowling....\n\n\n";
+                    cout<<"\tScoreboard :       "    <<   s3      <<    "/"    <<   w3   <<    "                            Over-"     <<   over3    <<"."<<over3a;
+                    cout<<"\n\n\n\tJust type your guess. If it matches, Computer will be out. If not, we will add computer's score to it's score!\n\n\n";
+                    cout<<"\t\t\tType your guess here: ";
+                    cin>>eb3;
+                    srand(time(0));
+                    ceb3= rand()%5;
+                        switch(ceb3)
+                            {
+                                    case 1:
+                                        cebi3=1;
+                                         break;
+                                     case 2:
+                                        cebi3=2;
+                                         break;
+                                     case 3:
+                                        cebi3=3;
+                                         break;
+                                     case 4:
+                                        cebi3=4;
+                                         break;
+                                     case 0:
+                                        cebi3=6;
+                                         break;
+                            }
+                    switch(eb3)
+                            {
+                            case 1:
+                                ebi3=1;
+                                break;
+                            case 2:
+                                ebi3=2;
+                                 break;
+                            case 3:
+                                ebi3=3;
+                                 break;
+                            case 4:
+                                ebi3=4;
+                                 break;
+                            case 6:
+                                ebi3=6;
+                                 break;
+                            default:
+                                legalball2=0;
+                                break;
+                            }
+
+                    if(cebi3==ebi3)
+                    {   w3=w3+1;
+                        cout<<"OUT !";
+                        cout<< "\n\n\nPress any key to continue....";
+                        getch();
+                        bc3++;
+                    }
+                    else if(legalball2==0)
+                        {bc3=bc3;
+                         cout<<"\n\tNo Ball !";
+                         cout<< "\n\tComputer has scored "<<cebi3<<"+1 in this ball\n\n\n\nPress any key to continue....";
+                         getch();
+                         s3= s3+cebi3+1;}
+                    else
+                    {
+                        s3= s3+cebi3;
+                        cout<< "\n\tComputer has scored "<<cebi3<<" in this ball\n\n\n\nPress any key to continue....";
+                        getch();
+                        bc3++;
+                    }
+    }while(bc3<=30 && w3 < 3);
+
+//player bat
+   int s4, w4, bc4, eb4, ebi4, ceb4,cebi4,over4,over4a,t2, legalbat2;
+s4=0;
+w4=0;
+bc4=0;
+t2= s3+1;
+do{
+
+         system("CLS");
+                    system("color 0b");
+                    over4=bc4 / 6;
+                    over4a = bc4 %6;
+
+                    cout<< "\n\n\t2nd Innings\n\n\n\t5 overs match, each team has 3 wickets\n\n\tYou are now batting....\n\n\n";
+                    cout<<"\tScoreboard :       "<<s4<<"/"<<w4<<"                            Over-"<<over4<<"."<<over4a<<"                       Target- "<<t2;
+                    cout<<"\n\n\n\tJust type your guess. If it matches, you will be out. If not, we will add it to your score!\n\n\n";
+                    cout<<"\t\t\tType your guess here: ";
+                    cin>>eb4;
+                    switch(eb4)
+                            {
+                            case 1:
+                                ebi4=1;
+                                break;
+                            case 2:
+                                ebi4=2;
+                                 break;
+                            case 3:
+                                ebi4=3;
+                                 break;
+                            case 4:
+                                ebi4=4;
+                                 break;
+                            case 6:
+                                ebi4=6;
+                                 break;
+                            default:
+                                ebi4=0;
+                                legalbat2=0;
                                 cout<<"OUT !";
                                  break;
                             }
@@ -506,7 +1436,7 @@ do{
                             }
 
 
-                    if(cebi4==ebi4 || cebi44==ebi4)
+                    if(cebi4==ebi4 || cebi44==ebi4 || legalbat2==0)
                     {   w4 = w4+1;
                         cout<<"OUT !";
                         cout<< "\n\n\nPress any key to continue....";
@@ -530,7 +1460,7 @@ do{
          intro();
      }else if ( s3 == s4)
         {    system("CLS");
-         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tMatch Tied!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t         Match Tied!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
          getch();
              intro();
         }
