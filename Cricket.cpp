@@ -2,7 +2,7 @@
 ***Don't run this code here as it is a interactive program. Use other C++ IDE ***
 **Just copy the whole code and paste in the IDE that you use for practice and run it.**
 
-Cricket game....v1.0.2
+Cricket game....v1.0.3
 
 [Last update: July 10, 2021, FIXED ALL THE BUGS]
 
