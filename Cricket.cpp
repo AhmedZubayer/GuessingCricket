@@ -4,7 +4,7 @@
 
 Cricket game....v1.0.2
 
-[Last update: July 07, 2021, FIXED ALL THE BUGS]
+[Last update: July 10, 2021, FIXED ALL THE BUGS]
 
 This game is mainly based on random numbers! That's why computer's strategy was too poor.(But not now!)
 
@@ -330,7 +330,7 @@ do {
                         getch();
                         bc2++;
                     }
-            }while(bc2<=30 && w2<3 && s1>s2);
+            }while(bc2<=30 && w2<3 && s1>=s2);
 
 
      if(s1>s2)
@@ -341,7 +341,7 @@ do {
      }
      else if ( s1 == s2)
         {    system("CLS");
-         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tMatch Tied!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t         Match Tied!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
          getch();
              intro();
         }
@@ -520,7 +520,7 @@ do{
                         getch();
                         bc4++;
                     }
-    }while(bc4<=30 && w4<3 && s3>s4);
+    }while(bc4<=30 && w4<3 && s3>=s4);
 
 
                     if(s4>s3)
