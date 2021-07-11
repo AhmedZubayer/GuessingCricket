@@ -3,10 +3,25 @@
 **Just copy the whole code and paste in the IDE that you use for practice and run it.**
 
 ** I can assure you that you will love it if you try at least once! **
+__________________________________________________________________________
 
-Cricket game....v2.0
+                        ***************************
+                        * Guessing Cricket v2.0.1 *
+                        ***************************
 
-[Last update: July 10, 2021, Added new feature: Difficulty selector]
+[Last update: July 11, 2021, Added new feature: Difficulty selector ]
+
+Also available on: https://github.com/AhmedZubayer/GuessingCricketGame
+__________________________________________________________________________
+
+Get all the previous version files from the link:
+**************************************************************************
+*       https://github.com/AhmedZubayer/GuessingCricketGame/releases     *
+**************************************************************************
+History of the major previous releases:
+v1.0.0----> First initial release
+v2.0  ----> Added new feature: Game difficulty selection
+__________________________________________________________________________
 
 This game is mainly based on random numbers!
 
@@ -88,7 +103,7 @@ intro();
 int about(){
 system("CLS");
 system ("color e");
-cout<<"\t\t\t\t\t\t\t\t\tAbout this game\n\nThis game is made by Ahmed Zubayer. This is made just for fun. Have fun playing with your luck. This game is at beginning stage. We are upgrading it.\nFeel free to share your idea with us. Hope you will enjoy it. \n\n\nContact me: E-mail: zubayerforyou@gmail.com\n\n\n\n***Made with LOVE in Bangladesh***"<<endl<<endl;
+cout<<"\n\n\n\n\t\t\t\t\t\t\t\t\tAbout this game\n\nThis game is made by Ahmed Zubayer. Playing this is a lot of fun. Have fun playing with your luck. This game is at beginning stage. We are upgrading it.\nFeel free to share your idea. Hope you will enjoy it. HAPPY GAMING AGAINST YOUR LUCK! \n\n\nContact me: E-mail: zubayerforyou@gmail.com\n\n\n\n***Made with LOVE in Bangladesh***"<<endl<<endl;
 cout<<"\n\n\nPress any key to continue ....";
 getch();
 intro();
@@ -112,8 +127,8 @@ int lvl_selection(){
 system("CLS");
 system ("color e");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\tSelect game level\n";
-cout<<"\n\t\t\t\t\t\t\t\t1. Easy (Opponent Level: Noob)\n\t\t\t\t\t\t\t\t2. Medium (Opponent Level: Pro)\n\t\t\t\t\t\t\t\t3. Hard (Opponent Level: Master)\n"<<endl<<endl;
-cout<<"\t\t\t\t\t\t\t\t\tSelected game level: ";
+cout<<"\n\n\n\t\t\t\t\t\t\t\t1. Easy (Opponent Level: Noob)\n\n\t\t\t\t\t\t\t\t2. Medium (Opponent Level: Pro)\n\n\t\t\t\t\t\t\t\t3. Hard (Opponent Level: Master)\n"<<endl<<endl;
+cout<<"\t\t\t\t\t\t\t\t     Selected game level: ";
 int level_selection;
 cin>>level_selection;
 switch (level_selection){
@@ -134,9 +149,9 @@ lvl_selection();
 int toss_easy(){
 system("CLS");
 system("color 0d");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t....TOSS....\n";
-cout<< "\n\n\n\t\t\t\t\t\t\tChoose between Head and Tail."<<endl;
-cout<< "\n\n\n\t\t\t\t\t\t\tType H/h for head and T/t for tail. \n\t\t\t\t\t\t\tYou are choosing: ";
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t     ....TOSS....\n";
+cout<< "\n\n\n\t\t\t\t\t\t\t            Choose between Head and Tail."<<endl;
+cout<< "\n\n\n\t\t\t\t\t\t\t         Type H/h for head and T/t for tail. \n\t\t\t\t\t\t\t         You are choosing: ";
 char player_toss;
 char toss_result;
 int toss_initial;
@@ -199,9 +214,9 @@ w1=0;
 bc1=0;
 
 do
-    {
+    {               legalbat1=1;
 
-                     system("CLS");
+                    system("CLS");
                     system("color 0b");
                     over1=bc1 / 6;
                     over1a = bc1 %6;
@@ -230,8 +245,6 @@ do
                                  break;
                             default:
                                 legalbat1=0;
-                                ebi1=0;
-                                cout<<"OUT !";
                                  break;
                             }
                     srand(time(0));
@@ -260,7 +273,7 @@ do
 
                     if(cebi1==ebi1 || legalbat1==0)
                     {   w1 = w1+1;
-                        cout<<"OUT !";
+                        cout<<"OUT!";
                         cout<< "\n\n\nPress any key to continue....";
                         getch();
                     }
@@ -284,6 +297,8 @@ s2=0;
 w2=0;
 bc2=0;
 do {
+                    legalball1=1;
+
                     system("CLS");
                     system("color 0b");
                     over2=bc2 / 6;
@@ -332,14 +347,15 @@ do {
                                 ebi2=6;
                                  break;
                             default:
-                                legalball1 == 0;
+                                ebi2 = 0;
+                                legalball1 = 0;
                                 break;
 
                             }
 
                     if(cebi2==ebi2)
                     {   w2=w2+1;
-                        cout<<"OUT !";
+                        cout<<"OUT!";
                         cout<< "\n\n\nPress any key to continue....";
                         getch();
                         bc2++;
@@ -357,7 +373,7 @@ do {
                         getch();
                         bc2++;
                     }
-            }while(bc2<=30 && w2<3 && s1>=s2);
+            }while(bc2<=30 && w2<3 && t1>s2);
 
 
      if(s1>s2)
@@ -387,6 +403,8 @@ s3=0;
 w3=0;
 bc3=0;
 do{
+
+                    legalball2=1;
 
                     system("CLS");
                     system("color 0b");
@@ -436,13 +454,14 @@ do{
                                 ebi3=6;
                                  break;
                             default:
+                                ebi3=0;
                                 legalball2=0;
                                 break;
                             }
 
                     if(cebi3==ebi3)
                     {   w3=w3+1;
-                        cout<<"OUT !";
+                        cout<<"OUT!";
                         cout<< "\n\n\nPress any key to continue....";
                         getch();
                         bc3++;
@@ -470,7 +489,9 @@ bc4=0;
 t2= s3+1;
 do{
 
-         system("CLS");
+                    legalbat2=1;
+
+                    system("CLS");
                     system("color 0b");
                     over4=bc4 / 6;
                     over4a = bc4 %6;
@@ -498,9 +519,7 @@ do{
                                 ebi4=6;
                                  break;
                             default:
-                                legalbat2==0;
-                                ebi4=0;
-                                cout<<"OUT !";
+                                legalbat2=0;
                                  break;
                             }
                     srand(time(0));
@@ -526,7 +545,7 @@ do{
 
                     if(cebi4==ebi4 || legalbat2==0)
                     {   w4 = w4+1;
-                        cout<<"OUT !";
+                        cout<<"OUT!";
                         cout<< "\n\n\nPress any key to continue....";
                         getch();
                         bc4++;
@@ -538,7 +557,7 @@ do{
                         getch();
                         bc4++;
                     }
-    }while(bc4<=30 && w4<3 && s3>=s4);
+    }while(bc4<=30 && w4<3 && t2>s4);
 
 
                     if(s4>s3)
@@ -562,9 +581,9 @@ do{
 int toss_medium(){
 system("CLS");
 system("color 0d");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t....TOSS....\n";
-cout<< "\n\n\n\t\t\t\t\t\t\tChoose between Head and Tail."<<endl;
-cout<< "\n\n\n\t\t\t\t\t\t\tType H/h for head and T/t for tail. \n\t\t\t\t\t\t\tYou are choosing: ";
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t     ....TOSS....\n";
+cout<< "\n\n\n\t\t\t\t\t\t\t            Choose between Head and Tail."<<endl;
+cout<< "\n\n\n\t\t\t\t\t\t\t         Type H/h for head and T/t for tail. \n\t\t\t\t\t\t\t         You are choosing: ";
 char player_toss;
 char toss_result;
 int toss_initial;
@@ -628,8 +647,10 @@ bc1=0;
 
 do
     {
+                    legalbat1=1;
 
-                     system("CLS");
+
+                    system("CLS");
                     system("color 0b");
                     over1=bc1 / 6;
                     over1a = bc1 %6;
@@ -657,9 +678,7 @@ do
                                 ebi1=6;
                                  break;
                             default:
-                                ebi1=0;
                                 legalbat1=0;
-                                cout<<"OUT !";
                                  break;
                             }
                     srand(time(0));
@@ -709,7 +728,7 @@ do
 
                     if(cebi1==ebi1 || cebi11 ==ebi1 || legalbat1==0)
                     {   w1 = w1+1;
-                        cout<<"OUT !";
+                        cout<<"OUT!";
                         cout<< "\n\n\nPress any key to continue....";
                         getch();
                     }
@@ -732,6 +751,8 @@ s2=0;
 w2=0;
 bc2=0;
 do {
+                    legalball1=1;
+
                     system("CLS");
                     system("color 0b");
                     over2=bc2 / 6;
@@ -780,6 +801,7 @@ do {
                                 ebi2=6;
                                  break;
                             default:
+                                ebi2=0;
                                 legalball1=0;
                                 break;
 
@@ -787,7 +809,7 @@ do {
 
                     if(cebi2==ebi2)
                     {   w2=w2+1;
-                        cout<<"OUT !";
+                        cout<<"OUT!";
                         cout<< "\n\n\nPress any key to continue....";
                         getch();
                         bc2++;
@@ -805,7 +827,7 @@ do {
                         getch();
                         bc2++;
                     }
-            }while(bc2<=30 && w2<3 && s1>=s2);
+            }while(bc2<=30 && w2<3 && t1>s2);
 
 
      if(s1>s2)
@@ -835,6 +857,7 @@ s3=0;
 w3=0;
 bc3=0;
 do{
+                    legalball2=1;
 
                     system("CLS");
                     system("color 0b");
@@ -884,13 +907,14 @@ do{
                                 ebi3=6;
                                  break;
                             default:
+                                ebi3=0;
                                 legalball2=0;
                                 break;
                             }
 
                     if(cebi3==ebi3)
                     {   w3=w3+1;
-                        cout<<"OUT !";
+                        cout<<"OUT!";
                         cout<< "\n\n\nPress any key to continue....";
                         getch();
                         bc3++;
@@ -908,7 +932,7 @@ do{
                         getch();
                         bc3++;
                     }
-    }while(bc3<=30 && w3 < 3);
+    }while(bc3<=30 && w3<3);
 
 //player bat
    int s4, w4, bc4, eb4, ebi4, ceb4,cebi4,over4,over4a,t2,legalbat2;
@@ -918,7 +942,9 @@ bc4=0;
 t2= s3+1;
 do{
 
-         system("CLS");
+                    legalbat2=1;
+
+                    system("CLS");
                     system("color 0b");
                     over4=bc4 / 6;
                     over4a = bc4 %6;
@@ -946,8 +972,7 @@ do{
                                 ebi4=6;
                                  break;
                             default:
-                                ebi4=0;
-                                cout<<"OUT !";
+                                legalbat2=0;
                                  break;
                             }
                     srand(time(0));
@@ -996,7 +1021,7 @@ do{
 
                     if(cebi4==ebi4 || cebi44==ebi4 || legalbat2==0)
                     {   w4 = w4+1;
-                        cout<<"OUT !";
+                        cout<<"OUT!";
                         cout<< "\n\n\nPress any key to continue....";
                         getch();
                         bc4++;
@@ -1008,7 +1033,7 @@ do{
                         getch();
                         bc4++;
                     }
-    }while(bc4<=30 && w4<3 && s3>=s4);
+    }while(bc4<=30 && w4<3 && t2>s4);
 
 
                     if(s4>s3)
@@ -1032,9 +1057,9 @@ do{
 int toss_hard(){
 system("CLS");
 system("color 0d");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t....TOSS....\n";
-cout<< "\n\n\n\t\t\t\t\t\t\tChoose between Head and Tail."<<endl;
-cout<< "\n\n\n\t\t\t\t\t\t\tType H/h for head and T/t for tail. \n\t\t\t\t\t\t\tYou are choosing: ";
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t     ....TOSS....\n";
+cout<< "\n\n\n\t\t\t\t\t\t\t            Choose between Head and Tail."<<endl;
+cout<< "\n\n\n\t\t\t\t\t\t\t         Type H/h for head and T/t for tail. \n\t\t\t\t\t\t\t         You are choosing: ";
 char player_toss;
 char toss_result;
 int toss_initial;
@@ -1098,8 +1123,9 @@ bc1=0;
 
 do
     {
+                    legalbat1=1;
 
-                     system("CLS");
+                    system("CLS");
                     system("color 0b");
                     over1=bc1 / 6;
                     over1a = bc1 %6;
@@ -1127,16 +1153,13 @@ do
                                 ebi1=6;
                                  break;
                             default:
-                                ebi1=0;
                                 legalbat1=0;
-                                cout<<"OUT !";
                                  break;
                             }
                     srand(time(0));
                     ceb1= rand()%3;
                     srand(time(0));
                     int ceb11 = rand()%2;
-                     int cebi11;
                         switch(ceb1)
                             {
                                     case 0:
@@ -1150,6 +1173,7 @@ do
                                          break;
 
                             }
+                   int cebi11;
                    switch(ceb11)
                             {
                                     case 0:
@@ -1162,9 +1186,9 @@ do
                             }
 
 
-                    if(cebi1==ebi1 || legalbat1==0)
+                    if(cebi1==ebi1 || cebi11==ebi1 || legalbat1==0)
                     {   w1 = w1+1;
-                        cout<<"OUT !";
+                        cout<<"OUT!";
                         cout<< "\n\n\nPress any key to continue....";
                         getch();
                     }
@@ -1187,6 +1211,9 @@ s2=0;
 w2=0;
 bc2=0;
 do {
+
+                    legalball1=1;
+
                     system("CLS");
                     system("color 0b");
                     over2=bc2 / 6;
@@ -1235,6 +1262,7 @@ do {
                                 ebi2=6;
                                  break;
                             default:
+                                ebi2=0;
                                 legalball1=0;
                                 break;
 
@@ -1242,7 +1270,7 @@ do {
 
                     if(cebi2==ebi2)
                     {   w2=w2+1;
-                        cout<<"OUT !";
+                        cout<<"OUT!";
                         cout<< "\n\n\nPress any key to continue....";
                         getch();
                         bc2++;
@@ -1260,7 +1288,7 @@ do {
                         getch();
                         bc2++;
                     }
-            }while(bc2<=30 && w2<3 && s1>=s2);
+            }while(bc2<=30 && w2<3 && t1>s2);
 
 
      if(s1>s2)
@@ -1290,6 +1318,8 @@ s3=0;
 w3=0;
 bc3=0;
 do{
+
+                    legalball2=1;
 
                     system("CLS");
                     system("color 0b");
@@ -1339,13 +1369,14 @@ do{
                                 ebi3=6;
                                  break;
                             default:
+                                ebi3=6;
                                 legalball2=0;
                                 break;
                             }
 
                     if(cebi3==ebi3)
                     {   w3=w3+1;
-                        cout<<"OUT !";
+                        cout<<"OUT!";
                         cout<< "\n\n\nPress any key to continue....";
                         getch();
                         bc3++;
@@ -1373,7 +1404,9 @@ bc4=0;
 t2= s3+1;
 do{
 
-         system("CLS");
+                    legalbat2=1;
+
+                    system("CLS");
                     system("color 0b");
                     over4=bc4 / 6;
                     over4a = bc4 %6;
@@ -1401,9 +1434,7 @@ do{
                                 ebi4=6;
                                  break;
                             default:
-                                ebi4=0;
                                 legalbat2=0;
-                                cout<<"OUT !";
                                  break;
                             }
                     srand(time(0));
@@ -1438,7 +1469,7 @@ do{
 
                     if(cebi4==ebi4 || cebi44==ebi4 || legalbat2==0)
                     {   w4 = w4+1;
-                        cout<<"OUT !";
+                        cout<<"OUT!";
                         cout<< "\n\n\nPress any key to continue....";
                         getch();
                         bc4++;
@@ -1450,7 +1481,7 @@ do{
                         getch();
                         bc4++;
                     }
-    }while(bc4<=30 && w4<3 && s3>=s4);
+    }while(bc4<=30 && w4<3 && t2>s4);
 
 
                     if(s4>s3)
