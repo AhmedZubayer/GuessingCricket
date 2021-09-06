@@ -2,11 +2,14 @@
 
 Cricket game....v2.1.2
 
-[Last update of this version: August 28, 2021]
+[Last update of this version: September 06, 2021]
 
-Created by: Ahmed Zubayer
-Github: https://github.com/AhmedZubayer
-
+Updates:
+1. Modified the probability of being out in different game modes
+2. Added loading spinner before toss
+3. Added special visuals after scoring 4 or 6 and getting out.
+4. Modified the title screen.
+5. Added splash screen.
 */
 
 #include<iostream>
@@ -1754,10 +1757,10 @@ do
                                          break;
 
                             }
-                    cout<<cebi1<<cebi11<<endl;
+
 
                     if(cebi1==ebi1 || cebi11 ==ebi1 || legalbat1==0)
-                    {   w1 = w1*1;
+                    {   w1 = w1+1;
                         system("color 0c");
                         system("CLS");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n";
@@ -2154,10 +2157,9 @@ do{
                                         cebi24=4;
                                          break;
                             }
-cout<<cebi2<<cebi24<<endl;
 
                     if(cebi2==ebi2 || cebi24==ebi2 || legalbat2==0)
-                    {   w2 = w2*1;
+                    {   w2 = w2+1;
                         system("color 0c");
                         system("CLS");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n";
@@ -2873,6 +2875,10 @@ if(s1>s2)
 
 
             }
+
+
+
+
 
 
 
