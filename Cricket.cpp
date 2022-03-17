@@ -1,15 +1,17 @@
 /*
 
-Cricket game....v2.1.2
+Cricket game....v2.1.3
 
-[Last update of this version: September 06, 2021]
+[Last update of this version: MAR 17, 2022]
+
+Created by: Ahmed Zubayer
+Github: https://github.com/ThisIsZubayer
 
 Updates:
-1. Modified the probability of being out in different game modes
-2. Added loading spinner before toss
-3. Added special visuals after scoring 4 or 6 and getting out.
-4. Modified the title screen.
-5. Added splash screen.
+1. Added direction for adjusting the game screen.
+2. Updated the interface and texts.
+3. Used more user defined functions rather than rewritten codes again and again.
+
 */
 
 #include<iostream>
@@ -20,26 +22,39 @@ Updates:
 #include<string>
 #include<windows.h>
 using namespace std;
+
 //Function Declarations
-int intro();
-int howto();
-int about();
-int quit();
-int lvl_selection();
-int toss_easy();
-int batting_1st_easy();
-int bowling_1st_easy();
-int toss_medium();
-int batting_1st_medium();
-int bowling_1st_medium();
-int toss_hard();
-int batting_1st_hard();
-int bowling_1st_hard();
-int twoplayer_mode();
+
+//UI
+void intro_title();
+void intro();
+void intro_startup();
+void howto();
+void about();
+void quit();
+void lvl_selection();
+
+//Game graphics
+void out();
+void four();
+void six();
+void loading_screen();
+
+//In-game functions
+void toss_easy();
+void batting_1st_easy();
+void bowling_1st_easy();
+void toss_medium();
+void batting_1st_medium();
+void bowling_1st_medium();
+void toss_hard();
+void batting_1st_hard();
+void bowling_1st_hard();
+void twoplayer_mode();
 
 //Main Function
 int main(){
-    system("MODE CON COLS=168 LINES=45");
+    system("mode 650");
     system("color e");
     srand(time(0));
     cout<<"\n";
@@ -86,8 +101,8 @@ cout<<"                                       @@@@@@@   @@@@@@@@@@@@    @@@@@   
 cout<<"                                   @@@@@@@@@@@   @@@@@@@@@@@@@   @@@@@     @@@@@@@@@@@  @@@@@   @@@@@    @@@@@@@@@@  @@@@@@@@@@@@@       \n";
 cout<<"                                  @@@@@          @@@@@   @@@@@   @@@@@    @@@@@         @@@@@  @@@@@     @@@@@           @@@@@            \n";
 cout<<"                                 @@@@@           @@@@@@@@@@@@    @@@@@   @@@@@          @@@@@@@@@@       @@@@@@@@@@      @@@@@            \n";
-cout<<"                                 @@@@@@          @@@@@@@@@@@     @@@@@   @@@@@@         @@@@@ @@@@@@     @@@@@           @@@@@            \n";
-cout<<"                                  @@@@@@@@@@@@   @@@@@  @@@@@@   @@@@@    @@@@@@@@@@@@  @@@@@   @@@@@    @@@@@@@@@@      @@@@@            \n";
+cout<<"                                 @@@@@@          @@@@@ @@@@@     @@@@@   @@@@@@         @@@@@ @@@@@@     @@@@@           @@@@@            \n";
+cout<<"                                  @@@@@@@@@@@@   @@@@@  @@@@@    @@@@@    @@@@@@@@@@@@  @@@@@   @@@@@    @@@@@@@@@@      @@@@@            \n";
 cout<<"                                    @@@@@@@@@@   @@@@@   @@@@@   @@@@@      @@@@@@@@@@  @@@@@    @@@@@@  @@@@@@@@@@      @@@@@            \n";
 
 
@@ -96,10 +111,10 @@ Sleep(2500);
 
 
 
-    intro();
+    intro_startup();
 }
-//Custom Function
-int intro(){
+//Custom Functions
+void intro_title(){
 system("CLS");
 system("color a");
 cout<<endl<<endl;
@@ -118,219 +133,139 @@ cout<<"                                        @@@@@@@   @@@@@@@@@@@@    @@@@@  
 cout<<"                                    @@@@@@@@@@@   @@@@@@@@@@@@@   @@@@@     @@@@@@@@@@@  @@@@@   @@@@@    @@@@@@@@@@  @@@@@@@@@@@@@        \n";
 cout<<"                                   @@@@@          @@@@@   @@@@@   @@@@@    @@@@@         @@@@@  @@@@@     @@@@@           @@@@@            \n";
 cout<<"                                  @@@@@           @@@@@@@@@@@@    @@@@@   @@@@@          @@@@@@@@@@       @@@@@@@@@@      @@@@@            \n";
-cout<<"                                  @@@@@@          @@@@@@@@@@@     @@@@@   @@@@@@         @@@@@ @@@@@@     @@@@@           @@@@@            \n";
-cout<<"                                   @@@@@@@@@@@@   @@@@@  @@@@@@   @@@@@    @@@@@@@@@@@@  @@@@@   @@@@@    @@@@@@@@@@      @@@@@            \n";
+cout<<"                                  @@@@@@          @@@@@ @@@@@     @@@@@   @@@@@@         @@@@@ @@@@@@     @@@@@           @@@@@            \n";
+cout<<"                                   @@@@@@@@@@@@   @@@@@  @@@@@    @@@@@    @@@@@@@@@@@@  @@@@@   @@@@@    @@@@@@@@@@      @@@@@            \n";
 cout<<"                                     @@@@@@@@@@   @@@@@   @@@@@   @@@@@      @@@@@@@@@@  @@@@@    @@@@@@  @@@@@@@@@@      @@@@@            \n";
 cout<<"\n";
 
-
+}
+void intro_startup(){
+intro_title();
+cout<<endl<<endl;
+cout<<"                   Note:   If the window doesn't seem to fit your screen, you can adjust it by changing the font size. Right click on the Title Bar. \n                           Then go to Properties -> Font. Select the size that fits your screen and click on \"OK\".\n\n";
+cout<<endl;
+cout<<setw(110)<<"***Press the corresponding key of each command***";
+cout<<endl<<endl<<endl;
+cout<<"\t\t\t\t\t\t\t\t\t   1. Start game\n\t\t\t\t\t\t\t\t\t   2. How to play\n\t\t\t\t\t\t\t\t\t   3. About this game\n\t\t\t\t\t\t\t\t\t   4. Quit Game\n"<<endl;
+string introinput;
+cout<<"\t\t\t\t\t\t\t\t\t     Your input : ";
+cin>>introinput;
+if (introinput=="1"){lvl_selection();}
+else if (introinput=="2"){howto();}
+else if (introinput=="3"){about();}
+else if (introinput=="4"){quit();}
+else {cout<<"\n\t\t\t\t\t\t\t\t  ***Please enter correct number***\n\n\n\n  Press any key to continue....";
+        getch();
+        intro();
+     }
+}
+void intro(){
+intro_title();
 cout<<endl<<endl;
 cout<<setw(110)<<"***Press the corresponding key of each command***";
 cout<<endl<<endl<<endl;
-cout<<"\t\t\t\t\t\t\t\t\t   1. Start game\n\t\t\t\t\t\t\t\t\t   2. How to play\n\t\t\t\t\t\t\t\t\t   3. About this game\n\t\t\t\t\t\t\t\t\t   4. Quit Game"<<endl<<endl;
-int introinput;
+cout<<"\t\t\t\t\t\t\t\t\t   1. Start game\n\t\t\t\t\t\t\t\t\t   2. How to play\n\t\t\t\t\t\t\t\t\t   3. About this game\n\t\t\t\t\t\t\t\t\t   4. Quit Game\n"<<endl;
+string introinput;
 cout<<"\t\t\t\t\t\t\t\t\t     Your input : ";
 cin>>introinput;
-switch(introinput){
-case 1:
-lvl_selection();
-break;
-case 2:
-howto();
-break;
-case 3:
-about();
-break;
-case 4:
-quit();
-break;
-default:
-cout<<endl<<"\t\t\t\t\t\t\t\t  ***Please enter correct number***\n\t\t\t\t\t\t\t\t  Press any key to continue....";
-getch;
-intro();
+if (introinput=="1"){lvl_selection();}
+else if (introinput=="2"){howto();}
+else if (introinput=="3"){about();}
+else if (introinput=="4"){quit();}
+else {cout<<"\n\t\t\t\t\t\t\t\t  ***Please enter correct number***\n\n\n\n  Press any key to continue....";
+        getch();
+        intro();
+     }
 }
-}
-int howto(){
+void howto(){
 system("CLS");
 system("color f");
-cout<<endl<<endl<<endl<<"\n\n\n\n\n\t\t\t\t\t\t\t\t\tHOW TO PLAY\n\n\n\n\n\n\t#Just press the the corresponding key of each command.\n\n\t#Don't press any extra key as that may crash the game. \n\n\t#Guess the run and type it and hit enter. \n\n\t#Type 1 , 2, 3, 4, 6 during batting and bowling. "<<endl<<"\t (Typing 0, 5 or more than 6 will be considered as 'Hit Wicket' during batting and 'No Ball' during balling.)"<<endl;
-cout<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<"Press any key to continue ....";
+cout<<"\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\tHOW TO PLAY\n\n\n\n\n\n\t#Just press the the corresponding key of each command.\n\n\t#Don't press any extra key as that may crash the game. \n\n\t#Guess the run, type it and hit enter. \n\n\t#Type 1 , 2, 3, 4, 6 during batting and bowling. \n\t (Typing 0, 5 or more than 6 will be considered as 'Hit Wicket' during batting and 'No Ball' during balling.)\n\n\t#Play using keyboard's number pad if possible.";
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue ....";
 getch();
 intro();
 }
-int about(){
+void about(){
 system("CLS");
 system("color e");
 system("MODE CON COLS=168 LINES=45");
 cout<<endl;
-cout<<"                                                                        ********************"<<endl;
-cout<<"                                                                        * Guessing Cricket *"<<endl;
-cout<<"                                                                        ********************"<<endl;
-cout<<endl;
-cout<<"    Game Version: 2.1.2                                                                                                           Version Released: August 28, 2021"<<endl;
-cout<<endl;
-cout<<endl;
-cout<<"    Also available on: https://github.com/AhmedZubayer/GuessingCricketGame  [Visit for further updates and releases]"<<endl;
-cout<<"    _______________________________________________________________________________________________________________________________________________________________"<<endl;
-cout<<endl;
-cout<<"    Get all the previous versions from the link:"<<endl;
-cout<<endl;
-cout<<"                                           **************************************************************************"<<endl;
-cout<<"                                           *       https://github.com/AhmedZubayer/GuessingCricketGame/releases     *\n";
-cout<<"                                           **************************************************************************"<<endl;
-cout<<endl;
-cout<<"    History of previous major releases:"<<endl;
-cout<<endl;
-cout<<"         v1.0.0 ----> First initial release"<<endl;
-cout<<"         v2.0   ----> Added new feature: Game difficulty selection"<<endl;
-cout<<"         v2.1   ----> Added new feature: Two player mode"<<endl;
-cout<<"         v2.1.2 ----> Upgraded the visuals of the entire game"<<endl;
-cout<<"    _______________________________________________________________________________________________________________________________________________________________"<<endl;
-cout<<endl;
-cout<<"    This game is made by Ahmed Zubayer. Playing this is lot of fun. Have fun playing it. I am upgrading it frequently. Feel free to share your ideas"<<endl;
-cout<<"    with me. Hope you will enjoy."<<endl;
-cout<<endl;
-cout<<"	   HAPPY GAMING AGAINST YOUR LUCK!"<<endl;
-cout<<endl;
-cout<<endl;
-cout<<"	   Contact with me:"<<endl;
-cout<<endl;
-cout<<"                          E-mail: zubayerforyou@gmail.com"<<endl;
-cout<<"                          Github: github.com/AhmedZubayer"<<endl;
-cout<<endl;
-cout<<endl;
-cout<<"                                                                   ***Made with LOVE in Bangladesh***"<<endl;
-cout<<endl;
-cout<<endl;
-cout<<endl;
-cout<<endl;
-cout<<endl;
-cout<<"Press any key to continue ....";
+cout<<"                                                                        ********************\n";
+cout<<"                                                                        * Guessing Cricket *\n";
+cout<<"                                                                        ********************\n\n";
+cout<<"    Game Version: 2.1.3                                                                                                            Version Released: March 17, 2022\n\n\n";
+cout<<"    Also available on: https://github.com/ThisIsZubayer/GuessingCricketGame  [Visit for further updates and releases]\n";
+cout<<"    _______________________________________________________________________________________________________________________________________________________________\n\n";
+cout<<"    Get the latest version from the link:\n\n";
+cout<<"                                                                ************************************\n";
+cout<<"                                                                *  https://bit.do/GuessingCricket  *\n";
+cout<<"                                                                ************************************\n\n";
+cout<<"    History of previous major releases:\n\n";
+cout<<"         v1.0.0 ----> First initial release\n";
+cout<<"         v2.0   ----> Added new feature: Game difficulty selection\n";
+cout<<"         v2.1   ----> Added new feature: Two player mode\n";
+cout<<"         v2.1.2 ----> Upgraded the visuals of the entire game\n";
+cout<<"    _______________________________________________________________________________________________________________________________________________________________\n\n";
+cout<<"        This game is made by me, Ahmed Zubayer. Playing this is lot of fun. Have fun playing it. I am upgrading it frequently. Feel free to share your ideas\n";
+cout<<"        with me. Hope you will enjoy.\n\n";
+cout<<"	   HAPPY GAMING AGAINST YOUR LUCK!\n\n\n";
+cout<<"	   Contact with me:\n\n";
+cout<<"                          E-mail: zubayerforyou@gmail.com\n";
+cout<<"                          Github: github.com/ThisIsZubayer\n\n\n";
+cout<<"                                                                  --> Made with love in BANGLADESH <--\n\n\n\n\n\n";
+cout<<"    Press any key to continue ....";
 
 getch();
 intro();
 }
-int quit(){
+void quit(){
 system("CLS");
 system("color 0c");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tAre you sure to quit this game?\n\n\n\t\t\t\t\t\t\t\tPress '1' to Yes or '2' to No.\n\n\t\t\t\t\t\t\t\t     You are choosing: ";
-int quit1;
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tAre you sure to quit this game?\n\n\n\t\t\t\t\t\t\t\tPress '1' for Yes or '2' for No.\n\n\t\t\t\t\t\t\t\t     You are choosing: ";
+string quit1;
 cin>>quit1;
-if (quit1==1)
+if (quit1=="1")
         {   system("CLS");
             system("color 0c");
             cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t  Sorry to see you go.... Come back soon, bye!\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-            return 0;
+            Sleep(1000);
+            return;
         }
 else{
 
     intro();
         }
 }
-int lvl_selection(){
+void lvl_selection(){
 system("CLS");
 system("color e");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\tSelect game type\n";
-cout<<"\n\n\n\t\t\t\t\t\t\t\t1. Easy (Opponent Level: Noob)\n\n\t\t\t\t\t\t\t\t2. Medium (Opponent Level: Pro)\n\n\t\t\t\t\t\t\t\t3. Hard (Opponent Level: Master)\n\n\t\t\t\t\t\t\t\t4. Two Player Mode\n"<<endl<<endl;
+cout<<"\n\n\n\t\t\t\t\t\t\t\t1. Easy (Opponent Level: Noob)\n\n\t\t\t\t\t\t\t\t2. Medium (Opponent Level: Pro)\n\n\t\t\t\t\t\t\t\t3. Hard (Opponent Level: Master)\n\n\t\t\t\t\t\t\t\t4. Two Player Mode\n\n"<<endl;
 cout<<"\t\t\t\t\t\t\t\t     Selected game type: ";
-int level_selection;
+string level_selection;
 cin>>level_selection;
-switch (level_selection){
-case 1:
-toss_easy();
-break;
-case 2:
-toss_medium();
-break;
-case 3:
-toss_hard();
-break;
-case 4:
-twoplayer_mode();
-break;
-default:
-cout<<endl<<"\t\t\t\t\t\t\t\t  ***Please enter correct number***\n\t\t\t\t\t\t\t\t  Press any key to continue....";
+if(level_selection == "1"){toss_easy();}
+else if(level_selection == "2"){toss_medium();}
+else if(level_selection == "3"){toss_hard();}
+else if(level_selection == "4"){twoplayer_mode();}
+else{
+cout<<"\n\t\t\t\t\t\t\t\t  ***Please enter correct number***\n\t\t\t\t\t\t\t\t  Press any key to continue....";
 getch();
 lvl_selection();
 }
 }
-int toss_easy(){
+void toss_easy(){
 system("CLS");
 system("color 0d");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t     ....TOSS....\n";
-cout<< "\n\n\n\t\t\t\t\t\t\t            Choose between Head and Tail."<<endl;
+cout<< "\n\n\n\t\t\t\t\t\t\t            Choose between Head and Tail.\n";
 cout<< "\n\n\n\t\t\t\t\t\t\t         Type H/h for head and T/t for tail. \n\t\t\t\t\t\t\t         You are choosing: ";
 char player_toss;
 char toss_result;
 int toss_initial;
 string toss_result_declare;
 cin>> player_toss;
-system("CLS");
-Sleep(90);
-for(int loop = 0; loop < 4; loop++)
-            {
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /           \n";
-cout<<"\t\t\t\t\t\t\t\t          /             \n";
-cout<<"\t\t\t\t\t\t\t\t         /               \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\              \n";
-cout<<"\t\t\t\t\t\t\t\t          \\            \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __  \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\        / \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                      / \n";
-cout<<"\t\t\t\t\t\t\t\t                     / \n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t                    \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                     \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                      \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t                      \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-
-             }
+loading_screen();
 player_toss=toupper(player_toss);
 if(player_toss == 'H' || player_toss == 'T'){
 
@@ -344,7 +279,7 @@ toss_result_declare = "Tail";}
 if (player_toss==toss_result)
 { system("CLS");
 system("color 0d");
-    cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t"<<toss_result_declare<<" is the call! Choose between batting and bowling...\n\n\t\t\t\t\t\t\t       Type '1' for batting and '2' for bowling\n\n\t\t\t\t\t\t\t\t\tYou are choosing: ";int player_choose;
+    cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t   "<<toss_result_declare<<" is up! Choose between batting and bowling...\n\n\t\t\t\t\t\t\t       Type '1' for batting and '2' for bowling\n\n\t\t\t\t\t\t\t\t\tYou are choosing: ";int player_choose;
 cin>>player_choose;
 switch (player_choose){
 case 1:
@@ -352,7 +287,7 @@ batting_1st_easy();
 case 2:
 bowling_1st_easy();
 default :
-cout<<endl<<endl<<endl<<endl<<"You have pressed the wrong key.\nPress any key to toss again...."<<endl;
+cout<<"\n\n\n\nYou have pressed the wrong key.\nPress any key to toss again....\n";
 getch();
 toss_easy();
 }
@@ -360,7 +295,7 @@ toss_easy();
 else{
 system("CLS");
 system("color 0d");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\tSorry, "<<toss_result_declare<<" is the call! Let computer choose between batting and bowling.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t   Sorry, "<<toss_result_declare<<" is up! Let computer choose between batting and bowling.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
 int computer_decision;
 string comp_chose;
@@ -369,25 +304,25 @@ computer_decision = rand() %2;
 if (computer_decision==0){
 system("CLS");
 system("color 0d");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bat first.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue...."<<endl;
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bat first.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....\n";
 getch();
 bowling_1st_easy();
 }
 else{
 system("CLS");
 system("color 0d");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bowl first.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue...."<<endl;
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bowl first.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....\n";
 getch();
 batting_1st_easy();
 }
 }
 }else{
-cout<<endl<<endl<<endl<<endl<<"You have pressed the wrong key.\nPress any key to toss again...."<<endl;
+cout<<"\n\n\n\nYou have pressed the wrong key.\nPress any key to toss again....\n";
 getch();
 toss_easy();
 }
 }
-int batting_1st_easy(){
+void batting_1st_easy(){
 //player bat
 
 system("CLS");
@@ -454,28 +389,22 @@ do
                     if(cebi1==ebi1 || legalbat1==0)
                     {   bc1++;
                         w1 = w1+1;
-                        system("color 0c");
-                        system("CLS");
-
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+                        out();
 getch();
                     }
 
                     else
                     {   bc1++;
                         s1 = s1+ebi1;
-                        cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress any key to continue....";
+
+                        if(ebi1==4)
+                            {four();}
+
+                        else if (ebi1==6)
+                            {six();}
+                        else
+                        {cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress any key to continue....";}
+
                         getch();
                     }
 
@@ -576,21 +505,8 @@ do {
 
                     if(cebi2==ebi2)
                     {   w2=w2+1;
-                        system("color 0c");
-                        system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
-getch();
+                        out();
+                        getch();
                         bc2++;
                     }
                     else if(legalball1 == 0)
@@ -602,8 +518,17 @@ getch();
                     else
                     {
                         s2 = s2+cebi2;
-                        cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi2<<" in this ball\n\n\n\nPress any key to continue....";
+
+                        if(cebi2==4)
+                            {four();}
+
+                        else if (cebi2==6)
+                            {six();}
+                        else
+                        {cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi2<<" in this ball\n\n\n\nPress any key to continue....";}
+
                         getch();
+
                         bc2++;
                     }
             }while(bc2<30 && w2<3 && t1>s2);
@@ -642,7 +567,7 @@ cout<<"\n\n\n\t\t\t\t\t\t2nd Innings:\n\n"<<setw(73)<<"Computer-"<<s2<<"/"<<w2<<
         }
 
 }
-int bowling_1st_easy(){
+void bowling_1st_easy(){
 //comp bat
 system("CLS");
 system("color 0b");
@@ -718,18 +643,7 @@ do{
                     {   w1=w1+1;
                         system("color 0c");
                         system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+out();
 getch();
                         bc1++;
                     }
@@ -742,8 +656,17 @@ getch();
                     else
                     {
                         s1= s1+cebi1;
-                        cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi1<<" in this ball\n\n\n\nPress any key to continue....";
+
+                        if(cebi1==4)
+                            {four();}
+
+                        else if (cebi1==6)
+                            {six();}
+                        else
+                        {cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi1<<" in this ball\n\n\n\nPress any key to continue....";}
+
                         getch();
+
                         bc1++;
                     }
                     t2= s1+1;
@@ -819,29 +742,25 @@ do{
 
                     if(cebi2==ebi2 || legalbat2==0)
                     {   w2 = w2+1;
-                        system("color 0c");
-                        system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+                        out();
 getch();
                         bc2++;
                     }
                     else
                     {
-                        s2 = s2+ebi2;
-                        cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi2<<" in this ball\n\n\n\nPress any key to continue....";
-                        getch();
                         bc2++;
+                        s2 = s2+ebi2;
+
+                        if(ebi2==4)
+                            {four();}
+
+                        else if (ebi2==6)
+                            {six();}
+                        else
+                        {cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi2<<" in this ball\n\n\n\nPress any key to continue....";}
+
+                        getch();
+
                     }
     }while(bc2<30 && w2<3 && t2>s2);
 system("CLS");
@@ -876,83 +795,18 @@ cout<<"\n\n\n\t\t\t\t\t\t2nd Innings:\n\n"<<setw(73)<<"You-"<<s2<<"/"<<w2<<"    
              intro();
         }
 }
-int toss_medium(){
+void toss_medium(){
 system("CLS");
 system("color 0d");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t     ....TOSS....\n";
-cout<< "\n\n\n\t\t\t\t\t\t\t            Choose between Head and Tail."<<endl;
+cout<< "\n\n\n\t\t\t\t\t\t\t            Choose between Head and Tail.\n";
 cout<< "\n\n\n\t\t\t\t\t\t\t         Type H/h for head and T/t for tail. \n\t\t\t\t\t\t\t         You are choosing: ";
 char player_toss;
 char toss_result;
 int toss_initial;
 string toss_result_declare;
 cin>> player_toss;
-system("CLS");
-Sleep(90);
-for(int loop = 0; loop < 4; loop++)
-            {
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /           \n";
-cout<<"\t\t\t\t\t\t\t\t          /             \n";
-cout<<"\t\t\t\t\t\t\t\t         /               \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\              \n";
-cout<<"\t\t\t\t\t\t\t\t          \\            \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __  \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\        / \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                      / \n";
-cout<<"\t\t\t\t\t\t\t\t                     / \n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t                    \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                     \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                      \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t                      \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-
-             }
+loading_screen();
 player_toss=toupper(player_toss);
 if(player_toss == 'H' || player_toss == 'T'){
 
@@ -966,7 +820,7 @@ toss_result_declare = "Tail";}
 if (player_toss==toss_result)
 { system("CLS");
 system("color 0d");
-    cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t"<<toss_result_declare<<" is the call! Choose between batting and bowling...\n\n\t\t\t\t\t\t\t       Type '1' for batting and '2' for bowling\n\n\t\t\t\t\t\t\t\t\tYou are choosing: ";
+    cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t   "<<toss_result_declare<<" is up! Choose between batting and bowling...\n\n\t\t\t\t\t\t\t       Type '1' for batting and '2' for bowling\n\n\t\t\t\t\t\t\t\t\tYou are choosing: ";
 int player_choose;
 cin>>player_choose;
 switch (player_choose){
@@ -975,7 +829,7 @@ batting_1st_medium();
 case 2:
 bowling_1st_medium();
 default :
-cout<<endl<<endl<<endl<<endl<<"You have pressed the wrong key.\nPress any key to toss again...."<<endl;
+cout<<"\n\n\n\nYou have pressed the wrong key.\nPress any key to toss again....\n";
 getch();
 toss_medium();
 }
@@ -983,7 +837,7 @@ toss_medium();
 else{
 system("CLS");
 system("color 0b");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\tSorry, "<<toss_result_declare<<" is the call! Let computer choose between batting and bowling.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t   Sorry, "<<toss_result_declare<<" is up! Let computer choose between batting and bowling.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
 int computer_decision;
 string comp_chose;
@@ -992,25 +846,25 @@ computer_decision = rand() %2;
 if (computer_decision==0){
 system("CLS");
 system("color 0d");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bat first.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue...."<<endl;
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bat first.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....\n";
 getch();
 bowling_1st_medium();
 }
 else{
 system("CLS");
 system("color 0d");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bowl first.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue...."<<endl;
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bowl first.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....\n";
 getch();
 batting_1st_medium();
 }
 }
 }else{
-cout<<endl<<endl<<endl<<endl<<"You have pressed the wrong key.\nPress any key to toss again...."<<endl;
+cout<<"\n\n\n\nYou have pressed the wrong key.\nPress any key to toss again....\n";
 getch();
 toss_medium();
 }
 }
-int batting_1st_medium(){
+void batting_1st_medium(){
 //player bat
 system("CLS");
 system("color 0b");
@@ -1091,26 +945,22 @@ do
 
                     if(cebi1==ebi1 || legalbat1==0)
                     {   w1 = w1+1;
-                        system("color 0c");
-                        system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+                        out();
 getch();
                     }
                     else
                     {
+
                         s1 = s1+ebi1;
-                        cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress any key to continue....";
+
+                        if(ebi1==4)
+                            {four();}
+
+                        else if (ebi1==6)
+                            {six();}
+                        else
+                        {cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress any key to continue....";}
+
                         getch();
                     }
                     bc1++;
@@ -1207,20 +1057,7 @@ do {
 
                     if(cebi2==ebi2)
                     {   w2=w2+1;
-                        system("color 0c");
-                        system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+                        out();
 getch();
                         bc2++;
                     }
@@ -1233,7 +1070,15 @@ getch();
                     else
                     {
                         s2 = s2+cebi2;
-                        cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi2<<" in this ball\n\n\n\nPress any key to continue....";
+
+                        if(cebi2==4)
+                            {four();}
+
+                        else if (cebi2==6)
+                            {six();}
+                        else
+                        {cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi2<<" in this ball\n\n\n\nPress any key to continue....";}
+
                         getch();
                         bc2++;
                     }
@@ -1273,7 +1118,7 @@ cout<<"\n\n\n\t\t\t\t\t\t2nd Innings:\n\n"<<setw(73)<<"Computer-"<<s2<<"/"<<w2<<
         }
 
 }
-int bowling_1st_medium(){
+void bowling_1st_medium(){
 //comp bat
 system("CLS");
 system("color 0b");
@@ -1345,20 +1190,7 @@ do{
 
                     if(cebi1==ebi1)
                     {   w1=w1+1;
-                        system("color 0c");
-                        system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+                        out();
 getch();
                         bc1++;
                     }
@@ -1371,7 +1203,15 @@ getch();
                     else
                     {
                         s1= s1+cebi1;
-                        cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi1<<" in this ball\n\n\n\nPress any key to continue....";
+
+                        if(cebi1==4)
+                            {four();}
+
+                        else if (cebi1==6)
+                            {six();}
+                        else
+                        {cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi1<<" in this ball\n\n\n\nPress any key to continue....";}
+
                         getch();
                         bc1++;
                     }t2= s1+1;
@@ -1467,27 +1307,22 @@ do{
 
                     if(cebi2==ebi2 || legalbat2==0)
                     {   w2 = w2+1;
-                        system("color 0c");
-                        system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+                        out();
 getch();
                         bc2++;
                     }
                     else
                     {
                         s2 = s2+ebi2;
-                        cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi2<<" in this ball\n\n\n\nPress any key to continue....";
+
+                        if(ebi2==4)
+                            {four();}
+
+                        else if (ebi2==6)
+                            {six();}
+                        else
+                        {cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi2<<" in this ball\n\n\n\nPress any key to continue....";}
+
                         getch();
                         bc2++;
                     }
@@ -1525,84 +1360,18 @@ cout<<"\n\n\n\t\t\t\t\t\t2nd Innings:\n\n"<<setw(73)<<"You-"<<s2<<"/"<<w2<<"    
              intro();
         }
 }
-int toss_hard(){
+void toss_hard(){
 system("CLS");
 system("color 0d");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t     ....TOSS....\n";
-cout<< "\n\n\n\t\t\t\t\t\t\t            Choose between Head and Tail."<<endl;
+cout<< "\n\n\n\t\t\t\t\t\t\t            Choose between Head and Tail.\n";
 cout<< "\n\n\n\t\t\t\t\t\t\t         Type H/h for head and T/t for tail. \n\t\t\t\t\t\t\t         You are choosing: ";
 char player_toss;
 char toss_result;
 int toss_initial;
 string toss_result_declare;
 cin>> player_toss;
-system("CLS");
-Sleep(90);
-for(int loop = 0; loop < 4; loop++)
-            {
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /           \n";
-cout<<"\t\t\t\t\t\t\t\t          /             \n";
-cout<<"\t\t\t\t\t\t\t\t         /               \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\              \n";
-cout<<"\t\t\t\t\t\t\t\t          \\            \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __  \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\        / \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                      / \n";
-cout<<"\t\t\t\t\t\t\t\t                     / \n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t                    \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                     \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                      \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t                      \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-
-             }
-
+loading_screen();
 player_toss=toupper(player_toss);
 if(player_toss == 'H' || player_toss == 'T'){
 
@@ -1617,7 +1386,7 @@ if (player_toss==toss_result)
 
 { system("CLS");
 system("color 0b");
-    cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t"<<toss_result_declare<<" is the call! Choose between batting and bowling...\n\n\t\t\t\t\t\t\t       Type '1' for batting and '2' for bowling\n\n\t\t\t\t\t\t\t\t\tYou are choosing: ";
+    cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t   "<<toss_result_declare<<" is up! Choose between batting and bowling...\n\n\t\t\t\t\t\t\t       Type '1' for batting and '2' for bowling\n\n\t\t\t\t\t\t\t\t\tYou are choosing: ";
 int player_choose;
 cin>>player_choose;
 switch (player_choose){
@@ -1626,7 +1395,7 @@ batting_1st_hard();
 case 2:
 bowling_1st_hard();
 default :
-cout<<endl<<endl<<endl<<endl<<"You have pressed the wrong key.\nPress any key to toss again...."<<endl;
+cout<<"\n\n\n\nYou have pressed the wrong key.\nPress any key to toss again....\n";
 getch();
 toss_hard();
 }
@@ -1634,7 +1403,7 @@ toss_hard();
 else{
 system("CLS");
 system("color 0b");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\tSorry, "<<toss_result_declare<<" is the call! Let computer choose between batting and bowling.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t   Sorry, "<<toss_result_declare<<" is up! Let computer choose between batting and bowling.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
 int computer_decision;
 string comp_chose;
@@ -1643,7 +1412,7 @@ computer_decision = rand() %2;
 if (computer_decision==0){
 system("CLS");
 system("color 0d");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bat first.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue...."<<endl;
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bat first.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....\n";
 
 getch();
 bowling_1st_hard();
@@ -1651,18 +1420,18 @@ bowling_1st_hard();
 else{
 system("CLS");
 system("color 0d");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bowl first.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue...."<<endl;
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bowl first.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....\n";
 getch();
 batting_1st_hard();
 }
 }
 }else{
-cout<<endl<<endl<<endl<<endl<<"You have pressed the wrong key.\nPress any key to toss again...."<<endl;
+cout<<"\n\n\n\nYou have pressed the wrong key.\nPress any key to toss again....\n";
 getch();
 toss_hard();
 }
 }
-int batting_1st_hard(){
+void batting_1st_hard(){
 //player bat
 system("CLS");
 system("color 0b");
@@ -1761,26 +1530,22 @@ do
 
                     if(cebi1==ebi1 || cebi11 ==ebi1 || legalbat1==0)
                     {   w1 = w1+1;
-                        system("color 0c");
-                        system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+                        out();
 getch();
                     }
                     else
                     {
+
                         s1 = s1+ebi1;
-                        cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress any key to continue....";
+
+                        if(ebi1==4)
+                            {four();}
+
+                        else if (ebi1==6)
+                            {six();}
+                        else
+                        {cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress any key to continue....";}
+
                         getch();
                     }
                     bc1++;
@@ -1878,20 +1643,7 @@ do {
 
                     if(cebi2==ebi2)
                     {   w2=w2+1;
-                        system("color 0c");
-                        system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+                        out();
 getch();
                         bc2++;
                     }
@@ -1904,7 +1656,15 @@ getch();
                     else
                     {
                         s2 = s2+cebi2;
-                        cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi2<<" in this ball\n\n\n\nPress any key to continue....";
+
+                        if(cebi2==4)
+                            {four();}
+
+                        else if (cebi2==6)
+                            {six();}
+                        else
+                        {cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi2<<" in this ball\n\n\n\nPress any key to continue....";}
+
                         getch();
                         bc2++;
                     }
@@ -1945,7 +1705,7 @@ cout<<"\n\n\n\t\t\t\t\t\t2nd Innings:\n\n"<<setw(73)<<"Computer-"<<s2<<"/"<<w2<<
         }
 
 }
-int bowling_1st_hard(){
+void bowling_1st_hard(){
 //comp bat
 system("CLS");
 system("color 0b");
@@ -2018,20 +1778,7 @@ do{
 
                     if(cebi1==ebi1)
                     {   w1=w1+1;
-                        system("color 0c");
-                        system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+                        out();
 getch();
                         bc1++;
                     }
@@ -2044,7 +1791,15 @@ getch();
                     else
                     {
                         s1= s1+cebi1;
-                        cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi1<<" in this ball\n\n\n\nPress any key to continue....";
+
+                        if(cebi1==4)
+                            {four();}
+
+                        else if (cebi1==6)
+                            {six();}
+                        else
+                        {cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi1<<" in this ball\n\n\n\nPress any key to continue....";}
+
                         getch();
                         bc1++;
                     }t2= s1+1;
@@ -2160,27 +1915,22 @@ do{
 
                     if(cebi2==ebi2 || cebi24==ebi2 || legalbat2==0)
                     {   w2 = w2+1;
-                        system("color 0c");
-                        system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+                        out();
 getch();
                         bc2++;
                     }
                     else
                     {
                         s2 = s2+ebi2;
-                        cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi2<<" in this ball\n\n\n\nPress any key to continue....";
+
+                        if(ebi2==4)
+                            {four();}
+
+                        else if (ebi2==6)
+                            {six();}
+                        else
+                        {cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi2<<" in this ball\n\n\n\nPress any key to continue....";}
+
                         getch();
                         bc2++;
                     }
@@ -2218,7 +1968,7 @@ cout<<"\n\n\n\t\t\t\t\t\t2nd Innings:\n\n"<<setw(73)<<"You-"<<s2<<"/"<<w2<<"    
              intro();
         }
 }
-int twoplayer_mode(){
+void twoplayer_mode(){
 system("CLS");
 system("color 0d");
 
@@ -2226,7 +1976,7 @@ system("color 0d");
 string name_1, name_2, toss_winner, toss_loser, batting_1st, bowling_1st;
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tEnter name of Player 1: ";
 cin>>name_1;
-cout<<endl<<endl<<"\t\t\t\t\t\t\t\tEnter name of Player 2: ";
+cout<<"\n\n\t\t\t\t\t\t\t\tEnter name of Player 2: ";
 cin>>name_2;
 
 //Two Player Mode: Toss
@@ -2236,73 +1986,7 @@ cout<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<en
 cout<<setw(100)<<"Computer will decide who is going to call";
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
-system("CLS");
-Sleep(90);
-for(int loop = 0; loop < 2; loop++)
-            {
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /           \n";
-cout<<"\t\t\t\t\t\t\t\t          /             \n";
-cout<<"\t\t\t\t\t\t\t\t         /               \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\              \n";
-cout<<"\t\t\t\t\t\t\t\t          \\            \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __  \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\        / \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                      / \n";
-cout<<"\t\t\t\t\t\t\t\t                     / \n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t                    \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                     \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                      \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t                      \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-
-             }
-
+loading_screen();
 system("CLS");
 system("color 0d");
 cout<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
@@ -2322,7 +2006,7 @@ if (two_player_toss_caller_decider == 0){
     system("CLS");
     system("color 0d");
     cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t     ....TOSS....\n";
-    cout<< "\n\n\n\t\t\t\t\t\t\t\t"<<name_1<<", choose between Head and Tail."<<endl;
+    cout<< "\n\n\n\t\t\t\t\t\t\t\t"<<name_1<<", choose between Head and Tail.\n";
     cout<< "\n\n\n\t\t\t\t\t\t\t         Type H/h for head and T/t for tail. \n\t\t\t\t\t\t\t         You are choosing: ";
 
     cin>>player_1_choose;
@@ -2361,7 +2045,7 @@ system("color 0d");
     system("CLS");
     system("color 0d");
     cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t     ....TOSS....\n";
-    cout<< "\n\n\n\t\t\t\t\t\t\t\t"<<name_2<<", choose between Head and Tail."<<endl;
+    cout<< "\n\n\n\t\t\t\t\t\t\t\t"<<name_2<<", choose between Head and Tail.\n";
     cout<< "\n\n\n\t\t\t\t\t\t\t         Type H/h for head and T/t for tail. \n\t\t\t\t\t\t\t         You are choosing: ";
 
     cin>>player_2_choose;
@@ -2389,73 +2073,8 @@ system("color 0d");
 
 }
 //Toss winner choosing between batting and bowling first
-system("CLS");
-Sleep(90);
-for(int loop = 0; loop < 4; loop++)
-            {
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /           \n";
-cout<<"\t\t\t\t\t\t\t\t          /             \n";
-cout<<"\t\t\t\t\t\t\t\t         /               \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\              \n";
-cout<<"\t\t\t\t\t\t\t\t          \\            \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __  \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\        / \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                      / \n";
-cout<<"\t\t\t\t\t\t\t\t                     / \n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
-cout<<"\t\t\t\t\t\t\t\t                    \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                     \\ \n";
-cout<<"\t\t\t\t\t\t\t\t                      \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t\t\t                      \n";
-cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
-cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
-cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
-cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
-cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
-Sleep(90);
-system("CLS");
-
-             }
-            cout<<endl<<endl<<endl<<endl<<"\n\n\n\n\n\t\t\t\t\t\t\t\t            "<< toss_result_declare<<" is the call!\n\n\n\n\t\t\t\t\t\t\t\t"<<toss_winner<<", choose between batting and bowling...\n\n\t\t\t\t\t\t\t\tType '1' for batting and '2' for bowling\n\n\t\t\t\t\t\t\t\tYou are choosing: ";
+loading_screen();
+            cout<<"\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t               "<< toss_result_declare<<" is up!\n\n\n\n\t\t\t\t\t\t\t\t"<<toss_winner<<", choose between batting and bowling...\n\n\t\t\t\t\t\t\t\tType '1' for batting and '2' for bowling\n\n\t\t\t\t\t\t\t\tYou are choosing: ";
             int toss_winner_choose_to;
             cin>>toss_winner_choose_to;
             if (toss_winner_choose_to == 1){
@@ -2565,21 +2184,7 @@ do
                     if((cebi1==ebi1 || legalbat1==0) && legalball1 != 0)
                     {   w1 = w1+1;
                         bc1++;
-system("color 0c");
-system("CLS");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
-
+                        out();
                         getch();
                     }
 
@@ -2590,40 +2195,16 @@ cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
 
                         if(ebi1 == 4)
                         {
-system("color 0a");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"                                         @@@@@@@@@@@@@@@      @@@@@@@@@        @@@@        @@@@    @@@@@@@@@@@@@     \n";
-cout<<"                                         @@@@@@@@@@@@@@@    @@@@@@@@@@@@@      @@@@        @@@@    @@@@@@@@@@@@@@     \n";
-cout<<"                                         @@@@              @@@@       @@@@     @@@@        @@@@    @@@@       @@@@  \n";
-cout<<"                                         @@@@             @@@@         @@@@    @@@@        @@@@    @@@@       @@@@  \n";
-cout<<"                                         @@@@@@@@@@@      @@@@         @@@@    @@@@        @@@@    @@@@@@@@@@@@@@         \n";
-cout<<"                                         @@@@@@@@@@@      @@@@         @@@@    @@@@        @@@@    @@@@@@@@@@@@@        \n";
-cout<<"                                         @@@@             @@@@         @@@@    @@@@        @@@@    @@@@   @@@@      \n";
-cout<<"                                         @@@@              @@@@       @@@@     @@@@@      @@@@@    @@@@     @@@@     \n";
-cout<<"                                         @@@@               @@@@@@@@@@@@@       @@@@@@@@@@@@@@     @@@@      @@@@    \n";
-cout<<"                                         @@@@                 @@@@@@@@@           @@@@@@@@@@       @@@@       @@@@   \n";
-
+four();
                         }
                         else if (ebi1 == 6)
                             {
-system("color 0e");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"                                                           @@@@@@@@        @@@@      @@@@       @@@@   \n";
-cout<<"                                                         @@@@@@@@@@@@      @@@@       @@@@     @@@@    \n";
-cout<<"                                                        @@@@      @@@@     @@@@        @@@@   @@@@     \n";
-cout<<"                                                        @@@@               @@@@         @@@@ @@@@      \n";
-cout<<"                                                         @@@@@@@@@@@       @@@@          @@@@@@@       \n";
-cout<<"                                                           @@@@@@@@@@@     @@@@          @@@@@@@       \n";
-cout<<"                                                                   @@@@    @@@@         @@@@ @@@@      \n";
-cout<<"                                                        @@@@       @@@@    @@@@        @@@@   @@@@     \n";
-cout<<"                                                         @@@@@@@@@@@@      @@@@       @@@@     @@@@    \n";
-cout<<"                                                           @@@@@@@@        @@@@      @@@@       @@@@   \n";
-
+six();
                             }
                         else{
                         cout<< "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t"<<batting_1st<<" has scored "<<ebi1<<" in this ball";
                         }
-                        cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+
                         getch();
                     }
                     else if (legalball1 == 0 && legalbat1 != 0)
@@ -2763,21 +2344,7 @@ do
                     if((cebi2==ebi2 || legalbat2==0) && legalball2 != 0)
                     {   w2 = w2+1;
                         bc2++;
-                       system("color 0c");
-                       system("CLS");
-                       cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+                       out();
                         getch();
                     }
 
@@ -2787,40 +2354,18 @@ cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
                         bc2++;
 if(ebi2 == 4)
                         {
-system("color 0a");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"                                         @@@@@@@@@@@@@@@      @@@@@@@@@        @@@@        @@@@    @@@@@@@@@@@@@     \n";
-cout<<"                                         @@@@@@@@@@@@@@@    @@@@@@@@@@@@@      @@@@        @@@@    @@@@@@@@@@@@@@     \n";
-cout<<"                                         @@@@              @@@@       @@@@     @@@@        @@@@    @@@@       @@@@  \n";
-cout<<"                                         @@@@             @@@@         @@@@    @@@@        @@@@    @@@@       @@@@  \n";
-cout<<"                                         @@@@@@@@@@@      @@@@         @@@@    @@@@        @@@@    @@@@@@@@@@@@@@         \n";
-cout<<"                                         @@@@@@@@@@@      @@@@         @@@@    @@@@        @@@@    @@@@@@@@@@@@@        \n";
-cout<<"                                         @@@@             @@@@         @@@@    @@@@        @@@@    @@@@   @@@@      \n";
-cout<<"                                         @@@@              @@@@       @@@@     @@@@@      @@@@@    @@@@     @@@@     \n";
-cout<<"                                         @@@@               @@@@@@@@@@@@@       @@@@@@@@@@@@@@     @@@@      @@@@    \n";
-cout<<"                                         @@@@                 @@@@@@@@@           @@@@@@@@@@       @@@@       @@@@   \n";
+four();
 
                         }
                         else if (ebi2 == 6)
                             {
-system("color 0e");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"                                                           @@@@@@@@        @@@@      @@@@       @@@@   \n";
-cout<<"                                                         @@@@@@@@@@@@      @@@@       @@@@     @@@@    \n";
-cout<<"                                                        @@@@      @@@@     @@@@        @@@@   @@@@     \n";
-cout<<"                                                        @@@@               @@@@         @@@@ @@@@      \n";
-cout<<"                                                         @@@@@@@@@@@       @@@@          @@@@@@@       \n";
-cout<<"                                                           @@@@@@@@@@@     @@@@          @@@@@@@       \n";
-cout<<"                                                                   @@@@    @@@@         @@@@ @@@@      \n";
-cout<<"                                                        @@@@       @@@@    @@@@        @@@@   @@@@     \n";
-cout<<"                                                         @@@@@@@@@@@@      @@@@       @@@@     @@@@    \n";
-cout<<"                                                           @@@@@@@@        @@@@      @@@@       @@@@   \n";
+six();
 
                             }
                         else{
                         cout<< "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t"<<bowling_1st<<" has scored "<<ebi2<<" in this ball";
                         }
-                        cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+
                         getch();
                     }
                     else if (legalball2 == 0 && legalbat2 != 0)
@@ -2856,29 +2401,148 @@ cout<<"\n\n\n\t\t\t\t\t\t1st Innings:\n\n"<<setw(73)<<batting_1st<<"-"<<s1<<"/"<
 cout<<"\n\n\n\t\t\t\t\t\t2nd Innings:\n\n"<<setw(73)<<bowling_1st<<"-"<<s2<<"/"<<w2<<"                Over-"<<over2<<"."<<over2a;
 if(s1>s2)
      {
-         cout<<"\n\n\n\n\n\n\n"<<setw(76)<<batting_1st<<" won the game by "<<s1-s2<<" run(s)!\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         cout<<"\n\n\n\n\n\n\n"<<setw(76)<<batting_1st<<" won the game by "<<s1-s2<<" run(s)!\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
          getch();
          intro();
      }
      else if ( s1 == s2)
         {
-         cout<<"\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t           Match Tied!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         cout<<"\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t           Match Tied!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
          getch();
              intro();
         }
      else if (s1<s2)
         {
-         cout<<"\n\n\n\n\n\n\n"<<setw(76)<<bowling_1st<<" won the game by "<<3-w2<<" wicket(s)!\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+         cout<<"\n\n\n\n\n\n\n"<<setw(76)<<bowling_1st<<" won the game by "<<3-w2<<" wicket(s)!\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
          getch();
              intro();
         }
 
 
             }
+void out(){
 
+system("color 0c");
+system("CLS");
 
+cout<<"\n\n\n\n\n\n\n\n\n\n\n";
+cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
+cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
+cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
+cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
+cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
+cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
+cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
+cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
+cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
+cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
+cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
 
+}
+void four(){
 
+system("CLS");
+system("color 0a");
+cout<<"\n\n\n\n\n\n\n\n\n\n\n";
+cout<<"                                         @@@@@@@@@@@@@@@      @@@@@@@@@        @@@@        @@@@    @@@@@@@@@@@@@     \n";
+cout<<"                                         @@@@@@@@@@@@@@@    @@@@@@@@@@@@@      @@@@        @@@@    @@@@@@@@@@@@@@     \n";
+cout<<"                                         @@@@              @@@@       @@@@     @@@@        @@@@    @@@@       @@@@  \n";
+cout<<"                                         @@@@             @@@@         @@@@    @@@@        @@@@    @@@@       @@@@  \n";
+cout<<"                                         @@@@@@@@@@@      @@@@         @@@@    @@@@        @@@@    @@@@@@@@@@@@@@         \n";
+cout<<"                                         @@@@@@@@@@@      @@@@         @@@@    @@@@        @@@@    @@@@@@@@@@@@@        \n";
+cout<<"                                         @@@@             @@@@         @@@@    @@@@        @@@@    @@@@   @@@@      \n";
+cout<<"                                         @@@@              @@@@       @@@@     @@@@@      @@@@@    @@@@     @@@@     \n";
+cout<<"                                         @@@@               @@@@@@@@@@@@@       @@@@@@@@@@@@@@     @@@@      @@@@    \n";
+cout<<"                                         @@@@                 @@@@@@@@@           @@@@@@@@@@       @@@@       @@@@   \n";
+cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+}
+void six(){
 
+system("CLS");
+system("color 0e");
+cout<<"\n\n\n\n\n\n\n\n\n\n\n";
+cout<<"                                                           @@@@@@@@        @@@@      @@@@       @@@@   \n";
+cout<<"                                                         @@@@@@@@@@@@      @@@@       @@@@     @@@@    \n";
+cout<<"                                                        @@@@      @@@@     @@@@        @@@@   @@@@     \n";
+cout<<"                                                        @@@@               @@@@         @@@@ @@@@      \n";
+cout<<"                                                         @@@@@@@@@@@       @@@@          @@@@@@@       \n";
+cout<<"                                                           @@@@@@@@@@@     @@@@          @@@@@@@       \n";
+cout<<"                                                                   @@@@    @@@@         @@@@ @@@@      \n";
+cout<<"                                                        @@@@       @@@@    @@@@        @@@@   @@@@     \n";
+cout<<"                                                         @@@@@@@@@@@@      @@@@       @@@@     @@@@    \n";
+cout<<"                                                           @@@@@@@@        @@@@      @@@@       @@@@   \n";
+cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+
+}
+void loading_screen(){
+
+system("CLS");
+Sleep(90);
+for(int loop = 0; loop < 2; loop++)
+            {
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
+cout<<"\t\t\t\t\t\t\t\t           /           \n";
+cout<<"\t\t\t\t\t\t\t\t          /             \n";
+cout<<"\t\t\t\t\t\t\t\t         /               \n";
+cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
+cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
+cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
+Sleep(90);
+system("CLS");
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
+cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
+cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
+cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
+cout<<"\t\t\t\t\t\t\t\t         \\              \n";
+cout<<"\t\t\t\t\t\t\t\t          \\            \n";
+cout<<"\t\t\t\t\t\t\t\t           \\__ __ __  \n";
+Sleep(90);
+system("CLS");
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
+cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
+cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
+cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
+cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
+cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
+cout<<"\t\t\t\t\t\t\t\t           \\        / \n";
+Sleep(90);
+system("CLS");
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
+cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
+cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
+cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
+cout<<"\t\t\t\t\t\t\t\t                      / \n";
+cout<<"\t\t\t\t\t\t\t\t                     / \n";
+cout<<"\t\t\t\t\t\t\t\t            __ __ __/ \n";
+Sleep(90);
+system("CLS");
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+cout<<"\t\t\t\t\t\t\t\t            __ __ __ \n";
+cout<<"\t\t\t\t\t\t\t\t                    \\ \n";
+cout<<"\t\t\t\t\t\t\t\t                     \\ \n";
+cout<<"\t\t\t\t\t\t\t\t                      \\ \n";
+cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
+cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
+cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
+Sleep(90);
+system("CLS");
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+cout<<"\t\t\t\t\t\t\t\t                      \n";
+cout<<"\t\t\t\t\t\t\t\t           /        \\ \n";
+cout<<"\t\t\t\t\t\t\t\t          /          \\ \n";
+cout<<"\t\t\t\t\t\t\t\t         /            \\ \n";
+cout<<"\t\t\t\t\t\t\t\t         \\            / \n";
+cout<<"\t\t\t\t\t\t\t\t          \\          / \n";
+cout<<"\t\t\t\t\t\t\t\t           \\__ __ __/ \n";
+Sleep(90);
+system("CLS");
+
+             }
+
+}
 
 
