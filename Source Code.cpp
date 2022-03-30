@@ -1,17 +1,13 @@
 /*
 
-Cricket game....v2.1.3
+Cricket game....v2.1.4
 
-[Last update of this version: MAR 17, 2022]
-
-Created by: Ahmed Zubayer
-Github: https://github.com/ThisIsZubayer
+[Last update of this version: March 30, 2022]
 
 Updates:
-1. Added direction for adjusting the game screen.
-2. Updated the interface and texts.
-3. Used more user defined functions rather than rewritten codes again and again.
-
+1. Visuals and interface.
+2. Crash handling.
+3. Updated game mode selection menu.
 */
 
 #include<iostream>
@@ -29,9 +25,11 @@ using namespace std;
 void intro_title();
 void intro();
 void intro_startup();
+void intro_menu();
 void howto();
 void about();
 void quit();
+void gamemode();
 void lvl_selection();
 
 //Game graphics
@@ -54,56 +52,60 @@ void twoplayer_mode();
 
 //Main Function
 int main(){
+
+    system("title GUESSING CRICKET");
     system("mode 650");
     system("color e");
     srand(time(0));
     cout<<"\n";
 
-cout<<"\t\t\t\t      @@@@@@@    @@@@    @@@@   @@@@@@@@   @@@@@@@@    @@@@@@@@  @@@@   @@@@     @@@     @@@@@@@@      \n";
-cout<<"\t\t\t\t   @@@@@@@@@@    @@@@    @@@@   @@@@@@@@  @@@@        @@@@       @@@@   @@@@@    @@@   @@@@@@@@@@      \n";
-cout<<"\t\t\t\t  @@@@           @@@@    @@@@   @@@@      @@@@@       @@@@@      @@@@   @@@@@@@  @@@  @@@@               \n";
-cout<<"\t\t\t\t  @@@@  @@@@@@   @@@@    @@@@   @@@@@@@@    @@@@@@@@    @@@@@@@  @@@@   @@@ @@@@@@@@  @@@@  @@@@@@       \n";
-cout<<"\t\t\t\t  @@@@@   @@@@   @@@@@  @@@@@   @@@@            @@@@       @@@@  @@@@   @@@   @@@@@@  @@@@@   @@@@       \n";
-cout<<"\t\t\t\t    @@@@@@@@@@     @@@@@@@@     @@@@@@@@@ @@@@@@@@@   @@@@@@@@   @@@@   @@@     @@@@    @@@@@@@@@@       \n";
+    char BOX=254, CHAR_FILL=219;
+
+cout<<"\t\t\t\t      "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"      \n";
+cout<<"\t\t\t\t   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<"        "<<BOX<<BOX<<BOX<<BOX<<"       "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"      \n";
+cout<<"\t\t\t\t  "<<BOX<<BOX<<BOX<<BOX<<"           "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<BOX<<"       "<<BOX<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<"               \n";
+cout<<"\t\t\t\t  "<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<" "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"       \n";
+cout<<"\t\t\t\t  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"            "<<BOX<<BOX<<BOX<<BOX<<"       "<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"       \n";
+cout<<"\t\t\t\t    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<" "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"       \n";
 
 
 cout<<"\n";
 
-cout<<"\t\t\t\t\t\t                           @@@@@@@@@@@@@@@@@\n";
-cout<<"\t\t\t\t\t\t                    @@@@@@@@               @@@@@@@@\n";
-cout<<"\t\t\t\t\t\t                @@@@                @@@@@@@@@@@    @@@@\n";
-cout<<"\t\t\t\t\t\t             @@@                @@@@@@@         @@@@@@@@@@\n";
-cout<<"\t\t\t\t\t\t           @@               @@@@@@       @@@@@           @@@\n";
-cout<<"\t\t\t\t\t\t         @@              @@@@@      @@@@        @@@@@@@@@@@ @@\n";
-cout<<"\t\t\t\t\t\t       @@             @@@@@     @@@        @@@@@@@@           @@\n";
-cout<<"\t\t\t\t\t\t      @@            @@@@@    @@@      @@@@@@@                  @@\n";
-cout<<"\t\t\t\t\t\t     @@           @@@@     @@      @@@@@                        @@\n";
-cout<<"\t\t\t\t\t\t    @@          @@@@    @@@     @@@@                             @@\n";
-cout<<"\t\t\t\t\t\t   @@          @@@@   @@@    @@@@                                 @@\n";
-cout<<"\t\t\t\t\t\t   @@         @@@    @@    @@@@                                   @@\n";
-cout<<"\t\t\t\t\t\t  @@        @@@@    @@    @@@                                      @@\n";
-cout<<"\t\t\t\t\t\t  @@       @@@@   @@    @@@@                                       @@\n";
-cout<<"\t\t\t\t\t\t  @@      @@@    @@    @@@                                         @@\n";
-cout<<"\t\t\t\t\t\t  @@     @@@@   @@    @@@                                          @@\n";
-cout<<"\t\t\t\t\t\t   @@   @@@@    @    @@@                                          @@\n";
-cout<<"\t\t\t\t\t\t    @@  @@@    @@   @@@                                          @@\n";
-cout<<"\t\t\t\t\t\t     @@ @@@   @@   @@@                                          @@\n";
-cout<<"\t\t\t\t\t\t      @@@@@  @@    @@@                                         @@\n";
-cout<<"\t\t\t\t\t\t        @@   @@   @@@                                        @@@\n";
-cout<<"\t\t\t\t\t\t         @@@@@   @@@                                      @@@\n";
-cout<<"\t\t\t\t\t\t           @@@   @@@                                     @@@\n";
-cout<<"\t\t\t\t\t\t              @@@@@                                   @@@\n";
-cout<<"\t\t\t\t\t\t                 @@@@                             @@@@\n";
-cout<<"\t\t\t\t\t\t                      @@@@@@               @@@@@@\n";
-cout<<"\t\t\t\t\t\t                             @@@@@@@@@@@@@\n";
+cout<<"\t\t\t\t\t\t                           "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t                    "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"               "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t                "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t             "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"         "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t           "<<CHAR_FILL<<CHAR_FILL<<"               "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"       "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"           "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t         "<<CHAR_FILL<<CHAR_FILL<<"              "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"      "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"        "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<" "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t       "<<CHAR_FILL<<CHAR_FILL<<"             "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"     "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"        "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"           "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t      "<<CHAR_FILL<<CHAR_FILL<<"            "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"      "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                  "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t     "<<CHAR_FILL<<CHAR_FILL<<"           "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"     "<<CHAR_FILL<<CHAR_FILL<<"      "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                        "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t    "<<CHAR_FILL<<CHAR_FILL<<"          "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"     "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                             "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t   "<<CHAR_FILL<<CHAR_FILL<<"          "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"   "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                 "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t   "<<CHAR_FILL<<CHAR_FILL<<"         "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                   "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t  "<<CHAR_FILL<<CHAR_FILL<<"        "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                      "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t  "<<CHAR_FILL<<CHAR_FILL<<"       "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"   "<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                       "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t  "<<CHAR_FILL<<CHAR_FILL<<"      "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                         "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t  "<<CHAR_FILL<<CHAR_FILL<<"     "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"   "<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                          "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t   "<<CHAR_FILL<<CHAR_FILL<<"   "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                          "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t    "<<CHAR_FILL<<CHAR_FILL<<"  "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<"   "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                          "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t     "<<CHAR_FILL<<CHAR_FILL<<" "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"   "<<CHAR_FILL<<CHAR_FILL<<"   "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                          "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t      "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"  "<<CHAR_FILL<<CHAR_FILL<<"    "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                         "<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t        "<<CHAR_FILL<<CHAR_FILL<<"   "<<CHAR_FILL<<CHAR_FILL<<"   "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                        "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t         "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"   "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                      "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t           "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"   "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                     "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t              "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                                   "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t                 "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"                             "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t                      "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"               "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"\n";
+cout<<"\t\t\t\t\t\t                             "<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<CHAR_FILL<<"\n";
 cout<<"\n";
-cout<<"                                       @@@@@@@   @@@@@@@@@@@@    @@@@@         @@@@@@@  @@@@@    @@@@@@  @@@@@@@@@@  @@@@@@@@@@@@@       \n";
-cout<<"                                   @@@@@@@@@@@   @@@@@@@@@@@@@   @@@@@     @@@@@@@@@@@  @@@@@   @@@@@    @@@@@@@@@@  @@@@@@@@@@@@@       \n";
-cout<<"                                  @@@@@          @@@@@   @@@@@   @@@@@    @@@@@         @@@@@  @@@@@     @@@@@           @@@@@            \n";
-cout<<"                                 @@@@@           @@@@@@@@@@@@    @@@@@   @@@@@          @@@@@@@@@@       @@@@@@@@@@      @@@@@            \n";
-cout<<"                                 @@@@@@          @@@@@ @@@@@     @@@@@   @@@@@@         @@@@@ @@@@@@     @@@@@           @@@@@            \n";
-cout<<"                                  @@@@@@@@@@@@   @@@@@  @@@@@    @@@@@    @@@@@@@@@@@@  @@@@@   @@@@@    @@@@@@@@@@      @@@@@            \n";
-cout<<"                                    @@@@@@@@@@   @@@@@   @@@@@   @@@@@      @@@@@@@@@@  @@@@@    @@@@@@  @@@@@@@@@@      @@@@@            \n";
+cout<<"                                       "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<"         "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"       \n";
+cout<<"                                   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"       \n";
+cout<<"                                  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"          "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<"         "<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<"           "<<BOX<<BOX<<BOX<<BOX<<BOX<<"            \n";
+cout<<"                                 "<<BOX<<BOX<<BOX<<BOX<<BOX<<"           "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"          "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"       "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<BOX<<"            \n";
+cout<<"                                 "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"          "<<BOX<<BOX<<BOX<<BOX<<BOX<<" "<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"         "<<BOX<<BOX<<BOX<<BOX<<BOX<<" "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<"           "<<BOX<<BOX<<BOX<<BOX<<BOX<<"            \n";
+cout<<"                                  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<BOX<<"            \n";
+cout<<"                                    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<BOX<<"            \n";
 
 
 Sleep(2500);
@@ -119,38 +121,45 @@ system("CLS");
 system("color a");
 cout<<endl<<endl;
 
-cout<<"                                  @@@@@@@@    @@@@    @@@@   @@@@@@@@     @@@@@@      @@@@@@   @@@@   @@@@@      @@@@       @@@@@@@@ \n";
-cout<<"                               @@@@@@@@@@@    @@@@    @@@@   @@@@@@@@   @@@@@@@@    @@@@@@@@   @@@@   @@@@@@     @@@@    @@@@@@@@@@@     \n";
-cout<<"                              @@@@@           @@@@    @@@@   @@@@      @@@@@       @@@@@       @@@@   @@@@@@@    @@@@   @@@@@\n";
-cout<<"                              @@@@            @@@@    @@@@   @@@@      @@@@        @@@@        @@@@   @@@@ @@@   @@@@   @@@@\n";
-cout<<"                              @@@@            @@@@    @@@@   @@@@@@@@   @@@@@       @@@@@      @@@@   @@@@  @@@  @@@@   @@@@    \n";
-cout<<"                              @@@@   @@@@@@   @@@@    @@@@   @@@@          @@@@@       @@@@@   @@@@   @@@@   @@@ @@@@   @@@@   @@@@@@   \n";
-cout<<"                              @@@@@    @@@@   @@@@    @@@@   @@@@            @@@@        @@@@  @@@@   @@@@    @@@@@@@   @@@@@    @@@@       \n";
-cout<<"                                @@@@@@@@@@@   @@@@@  @@@@@   @@@@@@@@  @@@@@@@@@@  @@@@@@@@@@  @@@@   @@@@     @@@@@@     @@@@@@@@@@@      \n";
-cout<<"                                  @@@@@@@@@     @@@@@@@@     @@@@@@@@  @@@@@@@@    @@@@@@@@    @@@@   @@@@      @@@@@       @@@@@@@@@          \n";
+char BOX=254;
+
+cout<<"                                  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<"       "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<" \n";
+cout<<"                               "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"     \n";
+cout<<"                              "<<BOX<<BOX<<BOX<<BOX<<BOX<<"           "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<BOX<<"       "<<BOX<<BOX<<BOX<<BOX<<BOX<<"       "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"\n";
+cout<<"                              "<<BOX<<BOX<<BOX<<BOX<<"            "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<"        "<<BOX<<BOX<<BOX<<BOX<<"        "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<" "<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"\n";
+cout<<"                              "<<BOX<<BOX<<BOX<<BOX<<"            "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"       "<<BOX<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"    \n";
+cout<<"                              "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"          "<<BOX<<BOX<<BOX<<BOX<<BOX<<"       "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<" "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   \n";
+cout<<"                              "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"            "<<BOX<<BOX<<BOX<<BOX<<"        "<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"       \n";
+cout<<"                                "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"      \n";
+cout<<"                                  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<BOX<<"       "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"          \n";
 cout<<"\n\n";
-cout<<"                                        @@@@@@@   @@@@@@@@@@@@    @@@@@         @@@@@@@  @@@@@    @@@@@@  @@@@@@@@@@  @@@@@@@@@@@@@        \n";
-cout<<"                                    @@@@@@@@@@@   @@@@@@@@@@@@@   @@@@@     @@@@@@@@@@@  @@@@@   @@@@@    @@@@@@@@@@  @@@@@@@@@@@@@        \n";
-cout<<"                                   @@@@@          @@@@@   @@@@@   @@@@@    @@@@@         @@@@@  @@@@@     @@@@@           @@@@@            \n";
-cout<<"                                  @@@@@           @@@@@@@@@@@@    @@@@@   @@@@@          @@@@@@@@@@       @@@@@@@@@@      @@@@@            \n";
-cout<<"                                  @@@@@@          @@@@@ @@@@@     @@@@@   @@@@@@         @@@@@ @@@@@@     @@@@@           @@@@@            \n";
-cout<<"                                   @@@@@@@@@@@@   @@@@@  @@@@@    @@@@@    @@@@@@@@@@@@  @@@@@   @@@@@    @@@@@@@@@@      @@@@@            \n";
-cout<<"                                     @@@@@@@@@@   @@@@@   @@@@@   @@@@@      @@@@@@@@@@  @@@@@    @@@@@@  @@@@@@@@@@      @@@@@            \n";
-cout<<"\n";
+cout<<"                                        "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<"         "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"        \n";
+cout<<"                                    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"        \n";
+cout<<"                                   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"          "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<"         "<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<"           "<<BOX<<BOX<<BOX<<BOX<<BOX<<"            \n";
+cout<<"                                  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"           "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"          "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"       "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<BOX<<"            \n";
+cout<<"                                  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"          "<<BOX<<BOX<<BOX<<BOX<<BOX<<" "<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"         "<<BOX<<BOX<<BOX<<BOX<<BOX<<" "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"     "<<BOX<<BOX<<BOX<<BOX<<BOX<<"           "<<BOX<<BOX<<BOX<<BOX<<BOX<<"            \n";
+cout<<"                                   "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<BOX<<"            \n";
+cout<<"                                     "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"   "<<BOX<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<"    "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"  "<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<BOX<<"      "<<BOX<<BOX<<BOX<<BOX<<BOX<<"            \n";
+cout<<"\n\n\n";
 
 }
 void intro_startup(){
 intro_title();
-cout<<endl<<endl;
-cout<<"                   Note:   If the window doesn't seem to fit your screen, you can adjust it by changing the font size. Right click on the Title Bar. \n                           Then go to Properties -> Font. Select the size that fits your screen and click on \"OK\".\n\n";
-cout<<endl;
-cout<<setw(110)<<"***Press the corresponding key of each command***";
+cout<<"\t     Note:   If the window doesn't seem to fit your screen, you can easily adjust it by pressing the CTRL key and scrolling upwards or downwards.\n\n";
+intro_menu();
+}
+void intro(){
+intro_title();
+intro_menu();
+}
+void intro_menu(){
+cout<<setw(102)<<"***Enter the number of each command***";
 cout<<endl<<endl<<endl;
-cout<<"\t\t\t\t\t\t\t\t\t   1. Start game\n\t\t\t\t\t\t\t\t\t   2. How to play\n\t\t\t\t\t\t\t\t\t   3. About this game\n\t\t\t\t\t\t\t\t\t   4. Quit Game\n"<<endl;
+cout<<"\t\t\t\t\t\t\t\t\t  (1) Start game\n\t\t\t\t\t\t\t\t\t  (2) How to play\n\t\t\t\t\t\t\t\t\t  (3) About this game\n\t\t\t\t\t\t\t\t\t  (4) Quit Game\n\n";
 string introinput;
 cout<<"\t\t\t\t\t\t\t\t\t     Your input : ";
 cin>>introinput;
-if (introinput=="1"){lvl_selection();}
+if (introinput=="1"){gamemode();}
 else if (introinput=="2"){howto();}
 else if (introinput=="3"){about();}
 else if (introinput=="4"){quit();}
@@ -159,28 +168,26 @@ else {cout<<"\n\t\t\t\t\t\t\t\t  ***Please enter correct number***\n\n\n\n  Pres
         intro();
      }
 }
-void intro(){
-intro_title();
-cout<<endl<<endl;
-cout<<setw(110)<<"***Press the corresponding key of each command***";
-cout<<endl<<endl<<endl;
-cout<<"\t\t\t\t\t\t\t\t\t   1. Start game\n\t\t\t\t\t\t\t\t\t   2. How to play\n\t\t\t\t\t\t\t\t\t   3. About this game\n\t\t\t\t\t\t\t\t\t   4. Quit Game\n"<<endl;
-string introinput;
-cout<<"\t\t\t\t\t\t\t\t\t     Your input : ";
-cin>>introinput;
-if (introinput=="1"){lvl_selection();}
-else if (introinput=="2"){howto();}
-else if (introinput=="3"){about();}
-else if (introinput=="4"){quit();}
-else {cout<<"\n\t\t\t\t\t\t\t\t  ***Please enter correct number***\n\n\n\n  Press any key to continue....";
-        getch();
-        intro();
-     }
+void gamemode(){
+system("CLS");
+system("color e");
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\tSelect game mode\n";
+cout<<"\n\n\n\t\t\t\t\t\t\t\t    (1) Single Player Mode\n\n\t\t\t\t\t\t\t\t    (2) Multiplayer Mode\n\n\n";
+cout<<"\t\t\t\t\t\t\t\t      Selected game mode: ";
+string gamemode_selection;
+cin>>gamemode_selection;
+if(gamemode_selection == "1"){lvl_selection();}
+else if(gamemode_selection == "2"){twoplayer_mode();}
+else{
+cout<<"\n\t\t\t\t\t\t\t\t  ***Please enter correct number***\n\t\t\t\t\t\t\t\t  Press any key to continue....";
+getch();
+gamemode();
+}
 }
 void howto(){
 system("CLS");
 system("color f");
-cout<<"\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\tHOW TO PLAY\n\n\n\n\n\n\t#Just press the the corresponding key of each command.\n\n\t#Don't press any extra key as that may crash the game. \n\n\t#Guess the run, type it and hit enter. \n\n\t#Type 1 , 2, 3, 4, 6 during batting and bowling. \n\t (Typing 0, 5 or more than 6 will be considered as 'Hit Wicket' during batting and 'No Ball' during balling.)\n\n\t#Play using keyboard's number pad if possible.";
+cout<<"\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t   HOW TO PLAY\n\n\n\n\n\n\t#Just press the the corresponding number of each command.\n\n\t#Guess the run, type it and hit enter. \n\n\t#Type 1, 2, 3, 4, 6 during batting and bowling. \n\t (Entering anything else will be considered as 'HIT WICKET' during batting and 'NO BALL' during balling.)\n\n\t#Play using keyboard's number pad if possible.";
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue ....";
 getch();
 intro();
@@ -188,31 +195,33 @@ intro();
 void about(){
 system("CLS");
 system("color e");
-system("MODE CON COLS=168 LINES=45");
+system("mode 650");
+
+char m = 205, lu = 201, ru = 187, lb = 200, rb = 188, p = 186, smiley = 2, heart = 3;
 cout<<endl;
-cout<<"                                                                        ********************\n";
-cout<<"                                                                        * Guessing Cricket *\n";
-cout<<"                                                                        ********************\n\n";
-cout<<"    Game Version: 2.1.3                                                                                                            Version Released: March 17, 2022\n\n\n";
-cout<<"    Also available on: https://github.com/ThisIsZubayer/GuessingCricketGame  [Visit for further updates and releases]\n";
-cout<<"    _______________________________________________________________________________________________________________________________________________________________\n\n";
+cout<<"                                                                        "<<lu<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<ru<<"\n";
+cout<<"                                                                        "<<p<<" Guessing Cricket "<<p<<"\n";
+cout<<"                                                                        "<<lb<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<rb<<"\n\n";
+cout<<"    Game Version: 2.1.4                                                                                                            Version Released: March 30, 2022\n\n\n";
+cout<<"    Also available on: https://github.com/ThisIsZubayer/GuessingCricketGame  [Visit for further updates and releases]\n\n";
+cout<<"    "<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<"\n\n";
 cout<<"    Get the latest version from the link:\n\n";
-cout<<"                                                                ************************************\n";
-cout<<"                                                                *  https://bit.do/GuessingCricket  *\n";
-cout<<"                                                                ************************************\n\n";
+cout<<"                                                                "<<lu<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<ru<<"\n";
+cout<<"                                                                "<<p<<"  https://bit.do/GuessingCricket  "<<p<<"\n";
+cout<<"                                                                "<<lb<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<rb<<"\n\n";
 cout<<"    History of previous major releases:\n\n";
 cout<<"         v1.0.0 ----> First initial release\n";
 cout<<"         v2.0   ----> Added new feature: Game difficulty selection\n";
 cout<<"         v2.1   ----> Added new feature: Two player mode\n";
-cout<<"         v2.1.2 ----> Upgraded the visuals of the entire game\n";
-cout<<"    _______________________________________________________________________________________________________________________________________________________________\n\n";
+cout<<"         v2.1.2 ----> Upgraded the visuals of the entire game\n\n";
+cout<<"    "<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<m<<"\n\n";
 cout<<"        This game is made by me, Ahmed Zubayer. Playing this is lot of fun. Have fun playing it. I am upgrading it frequently. Feel free to share your ideas\n";
 cout<<"        with me. Hope you will enjoy.\n\n";
-cout<<"	   HAPPY GAMING AGAINST YOUR LUCK!\n\n\n";
+cout<<"	   HAPPY GAMING AGAINST YOUR LUCK! "<<smiley<<"\n\n\n";
 cout<<"	   Contact with me:\n\n";
 cout<<"                          E-mail: zubayerforyou@gmail.com\n";
 cout<<"                          Github: github.com/ThisIsZubayer\n\n\n";
-cout<<"                                                                  --> Made with love in BANGLADESH <--\n\n\n\n\n\n";
+cout<<"                                                                    --> Made with "<<heart<<" in BANGLADESH <--\n\n\n\n";
 cout<<"    Press any key to continue ....";
 
 getch();
@@ -221,15 +230,15 @@ intro();
 void quit(){
 system("CLS");
 system("color 0c");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tAre you sure to quit this game?\n\n\n\t\t\t\t\t\t\t\tPress '1' for Yes or '2' for No.\n\n\t\t\t\t\t\t\t\t     You are choosing: ";
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tAre you sure to quit this game?\n\n\n\t\t\t\t\t\t\t\tPress 'y' for Yes or 'n' for No.\n\n\t\t\t\t\t\t\t\t     You are choosing: ";
 string quit1;
 cin>>quit1;
-if (quit1=="1")
+if (quit1=="y" || quit1=="Y")
         {   system("CLS");
             system("color 0c");
             cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t  Sorry to see you go.... Come back soon, bye!\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-            Sleep(1000);
-            return;
+            Sleep(1500);
+            exit(0);
         }
 else{
 
@@ -239,15 +248,14 @@ else{
 void lvl_selection(){
 system("CLS");
 system("color e");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\tSelect game type\n";
-cout<<"\n\n\n\t\t\t\t\t\t\t\t1. Easy (Opponent Level: Noob)\n\n\t\t\t\t\t\t\t\t2. Medium (Opponent Level: Pro)\n\n\t\t\t\t\t\t\t\t3. Hard (Opponent Level: Master)\n\n\t\t\t\t\t\t\t\t4. Two Player Mode\n\n"<<endl;
-cout<<"\t\t\t\t\t\t\t\t     Selected game type: ";
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t Select difficulty\n";
+cout<<"\n\n\n\t\t\t\t\t\t\t         (1) Easy [Opponent Level: Noob]\n\n\t\t\t\t\t\t\t         (2) Medium [Opponent Level: Pro]\n\n\t\t\t\t\t\t\t         (3) Hard [Opponent Level: Master]\n\n\n";
+cout<<"\t\t\t\t\t\t\t\t       Selected difficulty: ";
 string level_selection;
 cin>>level_selection;
 if(level_selection == "1"){toss_easy();}
 else if(level_selection == "2"){toss_medium();}
 else if(level_selection == "3"){toss_hard();}
-else if(level_selection == "4"){twoplayer_mode();}
 else{
 cout<<"\n\t\t\t\t\t\t\t\t  ***Please enter correct number***\n\t\t\t\t\t\t\t\t  Press any key to continue....";
 getch();
@@ -287,7 +295,7 @@ batting_1st_easy();
 case 2:
 bowling_1st_easy();
 default :
-cout<<"\n\n\n\nYou have pressed the wrong key.\nPress any key to toss again....\n";
+cout<<"\n\n\n\n\n\n\n\n\n\nYou have pressed the wrong key.\nPress any key to toss again....\n";
 getch();
 toss_easy();
 }
@@ -335,7 +343,8 @@ cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
 
 
-int s1, w1, bc1, eb1, ebi1, ceb1,cebi1,over1,over1a,t1,legalbat1;
+int s1, w1, bc1, ebi1, ceb1,cebi1,over1,over1a,t1,legalbat1;
+string eb1;
 double crr1;
 s1=0;
 w1=0;
@@ -358,27 +367,14 @@ do
                     cout<<"\n\n\n\tJust type your guess. If it matches, you will be out. If not, we will add it to your total!\n\n\n";
                     cout<<"\t\t\tType your guess here: ";
                     cin>>eb1;
-                    switch(eb1)
-                            {
-                            case 1:
-                                ebi1=1;
-                                break;
-                            case 2:
-                                ebi1=2;
-                                 break;
-                            case 3:
-                                ebi1=3;
-                                 break;
-                            case 4:
-                                ebi1=4;
-                                 break;
-                            case 6:
-                                ebi1=6;
-                                 break;
-                            default:
-                                legalbat1=0;
-                                 break;
-                            }
+
+                    if      (eb1=="1"){ebi1=1;}
+                    else if (eb1=="2"){ebi1=2;}
+                    else if (eb1=="3"){ebi1=3;}
+                    else if (eb1=="4"){ebi1=4;}
+                    else if (eb1=="6"){ebi1=6;}
+                    else {legalbat1=0;}
+
 
                     ceb1= rand()%10;
                     cebi1 = ceb1;
@@ -436,7 +432,8 @@ cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
 
 
-int s2, w2, bc2, eb2, ebi2, ceb2,cebi2,over2,over2a,legalball1;
+int s2, w2, bc2, ebi2, ceb2,cebi2,over2,over2a,legalball1;
+string eb2;
 double crr2, rrr;
 s2=0;
 w2=0;
@@ -479,29 +476,15 @@ do {
                                         cebi2=6;
                                          break;
                             }
-                    switch(eb2)
-                            {
-                            case 1:
-                                ebi2=1;
-                                break;
-                            case 2:
-                                ebi2=2;
-                                 break;
-                            case 3:
-                                ebi2=3;
-                                 break;
-                            case 4:
-                                ebi2=4;
-                                 break;
-                            case 6:
-                                ebi2=6;
-                                 break;
-                            default:
-                                ebi2 = 0;
-                                legalball1 = 0;
-                                break;
 
-                            }
+                    if      (eb2=="1"){ebi2=1;}
+                    else if (eb2=="2"){ebi2=2;}
+                    else if (eb2=="3"){ebi2=3;}
+                    else if (eb2=="4"){ebi2=4;}
+                    else if (eb2=="6"){ebi2=6;}
+                    else {ebi2 = 0;
+                          legalball1=0;}
+
 
                     if(cebi2==ebi2)
                     {   w2=w2+1;
@@ -575,7 +558,8 @@ cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t   1st Innings";
 cout<<"\n\n\n\t\t\t\t\t\t\t\t     Computer is now batting";
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
-int s1, w1, bc1, eb1, ebi1, ceb1,cebi1,over1,over1a,t2,legalball2;
+int s1, w1, bc1, ebi1, ceb1,cebi1,over1,over1a,t2,legalball2;
+string eb1;
 double crr1;
 s1=0;
 w1=0;
@@ -616,28 +600,13 @@ do{
                                         cebi1=6;
                                          break;
                             }
-                    switch(eb1)
-                            {
-                            case 1:
-                                ebi1=1;
-                                break;
-                            case 2:
-                                ebi1=2;
-                                 break;
-                            case 3:
-                                ebi1=3;
-                                 break;
-                            case 4:
-                                ebi1=4;
-                                 break;
-                            case 6:
-                                ebi1=6;
-                                 break;
-                            default:
-                                ebi1=0;
-                                legalball2=0;
-                                break;
-                            }
+                    if      (eb1=="1"){ebi1=1;}
+                    else if (eb1=="2"){ebi1=2;}
+                    else if (eb1=="3"){ebi1=3;}
+                    else if (eb1=="4"){ebi1=4;}
+                    else if (eb1=="6"){ebi1=6;}
+                    else {  ebi1=0;
+                            legalball2=0;}
 
                     if(cebi1==ebi1)
                     {   w1=w1+1;
@@ -691,7 +660,8 @@ cout<<"\n\n\n\t\t\t\t\t\t\t\t       You are now batting";
 cout<<"\n\n\t\t\t\t\t\t  You need "<<t2<<" run(s) from 30 balls to win at a run rate of "<<fixed<<setprecision(2)<<rrr1;
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
-   int s2, w2, bc2, eb2, ebi2, ceb2,cebi2,over2,over2a,legalbat2;
+   int s2, w2, bc2, ebi2, ceb2,cebi2,over2,over2a,legalbat2;
+   string eb2;
 double crr2, rrr;
 s2=0;
 w2=0;
@@ -715,27 +685,13 @@ do{
                     cout<<"\n\n\n\tJust type your guess. If it matches, you will be out. If not, we will add it to your score!\n\n\n";
                     cout<<"\t\t\tType your guess here: ";
                     cin>>eb2;
-                    switch(eb2)
-                            {
-                            case 1:
-                                ebi2=1;
-                                break;
-                            case 2:
-                                ebi2=2;
-                                 break;
-                            case 3:
-                                ebi2=3;
-                                 break;
-                            case 4:
-                                ebi2=4;
-                                 break;
-                            case 6:
-                                ebi2=6;
-                                 break;
-                            default:
-                                legalbat2=0;
-                                 break;
-                            }
+                    if      (eb2=="1"){ebi2=1;}
+                    else if (eb2=="2"){ebi2=2;}
+                    else if (eb2=="3"){ebi2=3;}
+                    else if (eb2=="4"){ebi2=4;}
+                    else if (eb2=="6"){ebi2=6;}
+                    else {legalbat2=0;}
+
 
                     ceb2= rand()%10;
                         cebi2 = ceb2;
@@ -743,7 +699,7 @@ do{
                     if(cebi2==ebi2 || legalbat2==0)
                     {   w2 = w2+1;
                         out();
-getch();
+                        getch();
                         bc2++;
                     }
                     else
@@ -829,7 +785,7 @@ batting_1st_medium();
 case 2:
 bowling_1st_medium();
 default :
-cout<<"\n\n\n\nYou have pressed the wrong key.\nPress any key to toss again....\n";
+cout<<"\n\n\n\n\n\n\n\n\n\nYou have pressed the wrong key.\nPress any key to toss again....\n";
 getch();
 toss_medium();
 }
@@ -875,7 +831,8 @@ cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 
 getch();
 
-int s1, w1, bc1, eb1, ebi1, ceb1,cebi1,over1,over1a,t1,legalbat1;
+int s1, w1, bc1, ebi1, ceb1,cebi1,over1,over1a,t1,legalbat1;
+string eb1;
 double crr1;
 s1=0;
 w1=0;
@@ -897,27 +854,14 @@ do
                     cout<<"\n\n\n\tJust type your guess. If it matches, you will be out. If not, we will add it to your total!\n\n\n";
                     cout<<"\t\t\tType your guess here: ";
                     cin>>eb1;
-                    switch(eb1)
-                            {
-                            case 1:
-                                ebi1=1;
-                                break;
-                            case 2:
-                                ebi1=2;
-                                 break;
-                            case 3:
-                                ebi1=3;
-                                 break;
-                            case 4:
-                                ebi1=4;
-                                 break;
-                            case 6:
-                                ebi1=6;
-                                 break;
-                            default:
-                                legalbat1=0;
-                                 break;
-                            }
+
+                    if      (eb1=="1"){ebi1=1;}
+                    else if (eb1=="2"){ebi1=2;}
+                    else if (eb1=="3"){ebi1=3;}
+                    else if (eb1=="4"){ebi1=4;}
+                    else if (eb1=="6"){ebi1=6;}
+                    else {legalbat1=0;}
+
 
                     ceb1= rand()%5;
 
@@ -989,7 +933,8 @@ cout<<"\n\n\n\t\t\t\t\t\t\t\t     Computer is now batting";
 cout<<"\n\n\t\t\t\t\t\t\tComputer needs "<<t1<<" run(s) from 30 ball(s) to win.";
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
-int s2, w2, bc2, eb2, ebi2, ceb2,cebi2,over2,over2a,legalball1;
+int s2, w2, bc2, ebi2, ceb2,cebi2,over2,over2a,legalball1;
+string eb2;
 double crr2, rrr;
 s2=0;
 w2=0;
@@ -1031,29 +976,13 @@ do {
                                         cebi2=6;
                                          break;
                             }
-                    switch(eb2)
-                            {
-                            case 1:
-                                ebi2=1;
-                                break;
-                            case 2:
-                                ebi2=2;
-                                 break;
-                            case 3:
-                                ebi2=3;
-                                 break;
-                            case 4:
-                                ebi2=4;
-                                 break;
-                            case 6:
-                                ebi2=6;
-                                 break;
-                            default:
-                                ebi2=0;
-                                legalball1=0;
-                                break;
-
-                            }
+                    if      (eb2=="1"){ebi2=1;}
+                    else if (eb2=="2"){ebi2=2;}
+                    else if (eb2=="3"){ebi2=3;}
+                    else if (eb2=="4"){ebi2=4;}
+                    else if (eb2=="6"){ebi2=6;}
+                    else {ebi2 = 0;
+                          legalball1=0;}
 
                     if(cebi2==ebi2)
                     {   w2=w2+1;
@@ -1126,7 +1055,8 @@ cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t   1st Innings";
 cout<<"\n\n\n\t\t\t\t\t\t\t\t     Computer is now batting";
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
-   int s1, w1, bc1, eb1, ebi1, ceb1,cebi1,over1,over1a,t2,legalball2;
+   int s1, w1, bc1, ebi1, ceb1,cebi1,over1,over1a,t2,legalball2;
+string eb1;
 double crr1;
 s1=0;
 w1=0;
@@ -1165,28 +1095,13 @@ do{
                                         cebi1=6;
                                          break;
                             }
-                    switch(eb1)
-                            {
-                            case 1:
-                                ebi1=1;
-                                break;
-                            case 2:
-                                ebi1=2;
-                                 break;
-                            case 3:
-                                ebi1=3;
-                                 break;
-                            case 4:
-                                ebi1=4;
-                                 break;
-                            case 6:
-                                ebi1=6;
-                                 break;
-                            default:
-                                ebi1=0;
-                                legalball2=0;
-                                break;
-                            }
+                    if      (eb1=="1"){ebi1=1;}
+                    else if (eb1=="2"){ebi1=2;}
+                    else if (eb1=="3"){ebi1=3;}
+                    else if (eb1=="4"){ebi1=4;}
+                    else if (eb1=="6"){ebi1=6;}
+                    else {  ebi1=0;
+                            legalball2=0;}
 
                     if(cebi1==ebi1)
                     {   w1=w1+1;
@@ -1236,7 +1151,8 @@ cout<<"\n\n\n\t\t\t\t\t\t\t\t     You are now batting";
 cout<<"\n\n\t\t\t\t\t\t  You need "<<t2<<" run(s) from 30 balls to win at a run rate of "<<fixed<<setprecision(2)<<rrr1;
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
-   int s2, w2, bc2, eb2, ebi2, ceb2,cebi2,over2,over2a,legalbat2;
+   int s2, w2, bc2, ebi2, ceb2,cebi2,over2,over2a,legalbat2;
+string eb2;
 double crr2, rrr;
 s2=0;
 w2=0;
@@ -1260,27 +1176,13 @@ do{
                     cout<<"\n\n\n\tJust type your guess. If it matches, you will be out. If not, we will add it to your score!\n\n\n";
                     cout<<"\t\t\tType your guess here: ";
                     cin>>eb2;
-                    switch(eb2)
-                            {
-                            case 1:
-                                ebi2=1;
-                                break;
-                            case 2:
-                                ebi2=2;
-                                 break;
-                            case 3:
-                                ebi2=3;
-                                 break;
-                            case 4:
-                                ebi2=4;
-                                 break;
-                            case 6:
-                                ebi2=6;
-                                 break;
-                            default:
-                                legalbat2=0;
-                                 break;
-                            }
+
+                    if      (eb2=="1"){ebi2=1;}
+                    else if (eb2=="2"){ebi2=2;}
+                    else if (eb2=="3"){ebi2=3;}
+                    else if (eb2=="4"){ebi2=4;}
+                    else if (eb2=="6"){ebi2=6;}
+                    else {legalbat2=0;}
 
                     ceb2= rand()%5;
                         switch(ceb2)
@@ -1395,7 +1297,7 @@ batting_1st_hard();
 case 2:
 bowling_1st_hard();
 default :
-cout<<"\n\n\n\nYou have pressed the wrong key.\nPress any key to toss again....\n";
+cout<<"\n\n\n\n\n\n\n\n\n\nYou have pressed the wrong key.\nPress any key to toss again....\n";
 getch();
 toss_hard();
 }
@@ -1442,7 +1344,8 @@ cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 
 getch();
 
-int s1, w1, bc1, eb1, ebi1, ceb1,cebi1,ceb11, cebi11, over1,over1a,t1,legalbat1;
+int s1, w1, bc1, ebi1, ceb1,cebi1,ceb11, cebi11, over1,over1a,t1,legalbat1;
+string eb1;
 double crr1;
 s1=0;
 w1=0;
@@ -1463,27 +1366,14 @@ do
                     cout<<"\n\n\n\tJust type your guess. If it matches, you will be out. If not, we will add it to your total!\n\n\n";
                     cout<<"\t\t\tType your guess here: ";
                     cin>>eb1;
-                    switch(eb1)
-                            {
-                            case 1:
-                                ebi1=1;
-                                break;
-                            case 2:
-                                ebi1=2;
-                                 break;
-                            case 3:
-                                ebi1=3;
-                                 break;
-                            case 4:
-                                ebi1=4;
-                                 break;
-                            case 6:
-                                ebi1=6;
-                                 break;
-                            default:
-                                legalbat1=0;
-                                 break;
-                            }
+
+                    if      (eb1=="1"){ebi1=1;}
+                    else if (eb1=="2"){ebi1=2;}
+                    else if (eb1=="3"){ebi1=3;}
+                    else if (eb1=="4"){ebi1=4;}
+                    else if (eb1=="6"){ebi1=6;}
+                    else {legalbat1=0;}
+
 
                      ceb1= rand()%5;
 
@@ -1574,7 +1464,8 @@ cout<<"\n\n\n\t\t\t\t\t\t\t\t     Computer is now batting";
 cout<<"\n\n\t\t\t\t\t\t\tComputer needs "<<t1<<" run(s) from 30 ball(s) to win.";
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
-int s2, w2, bc2, eb2, ebi2, ceb2,cebi2,over2,over2a,legalball1;
+int s2, w2, bc2, ebi2, ceb2,cebi2,over2,over2a,legalball1;
+string eb2;
 double crr2, rrr;
 s2=0;
 w2=0;
@@ -1617,29 +1508,13 @@ do {
                                         cebi2=6;
                                          break;
                             }
-                    switch(eb2)
-                            {
-                            case 1:
-                                ebi2=1;
-                                break;
-                            case 2:
-                                ebi2=2;
-                                 break;
-                            case 3:
-                                ebi2=3;
-                                 break;
-                            case 4:
-                                ebi2=4;
-                                 break;
-                            case 6:
-                                ebi2=6;
-                                 break;
-                            default:
-                                ebi2=0;
-                                legalball1=0;
-                                break;
-
-                            }
+                    if      (eb2=="1"){ebi2=1;}
+                    else if (eb2=="2"){ebi2=2;}
+                    else if (eb2=="3"){ebi2=3;}
+                    else if (eb2=="4"){ebi2=4;}
+                    else if (eb2=="6"){ebi2=6;}
+                    else {ebi2 = 0;
+                          legalball1=0;}
 
                     if(cebi2==ebi2)
                     {   w2=w2+1;
@@ -1713,7 +1588,8 @@ cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t   1st Innings";
 cout<<"\n\n\n\t\t\t\t\t\t\t\t     Computer is now batting";
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
-int s1, w1, bc1, eb1, ebi1, ceb1,cebi1,over1,over1a,t2,legalball2;
+int s1, w1, bc1,  ebi1, ceb1,cebi1,over1,over1a,t2,legalball2;
+string eb1;
 double crr1;
 s1=0;
 w1=0;
@@ -1753,28 +1629,13 @@ do{
                                         cebi1=6;
                                          break;
                             }
-                    switch(eb1)
-                            {
-                            case 1:
-                                ebi1=1;
-                                break;
-                            case 2:
-                                ebi1=2;
-                                 break;
-                            case 3:
-                                ebi1=3;
-                                 break;
-                            case 4:
-                                ebi1=4;
-                                 break;
-                            case 6:
-                                ebi1=6;
-                                 break;
-                            default:
-                                ebi1=6;
-                                legalball2=0;
-                                break;
-                            }
+                    if      (eb1=="1"){ebi1=1;}
+                    else if (eb1=="2"){ebi1=2;}
+                    else if (eb1=="3"){ebi1=3;}
+                    else if (eb1=="4"){ebi1=4;}
+                    else if (eb1=="6"){ebi1=6;}
+                    else {  ebi1=0;
+                            legalball2=0;}
 
                     if(cebi1==ebi1)
                     {   w1=w1+1;
@@ -1825,7 +1686,8 @@ cout<<"\n\n\n\t\t\t\t\t\t\t\t     You are now batting";
 cout<<"\n\n\t\t\t\t\t\t  You need "<<t2<<" run(s) from 30 balls to win at a run rate of "<<fixed<<setprecision(2)<<rrr1;
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
-   int s2, w2, bc2, eb2, ebi2, ceb2,cebi2, cebi24, ceb24, over2,over2a, legalbat2;
+   int s2, w2, bc2, ebi2, ceb2,cebi2, cebi24, ceb24, over2,over2a, legalbat2;
+string eb2;
 double crr2, rrr;
 s2=0;
 w2=0;
@@ -1849,27 +1711,12 @@ do{
                     cout<<"\n\n\n\tJust type your guess. If it matches, you will be out. If not, we will add it to your score!\n\n\n";
                     cout<<"\t\t\tType your guess here: ";
                     cin>>eb2;
-                    switch(eb2)
-                            {
-                            case 1:
-                                ebi2=1;
-                                break;
-                            case 2:
-                                ebi2=2;
-                                 break;
-                            case 3:
-                                ebi2=3;
-                                 break;
-                            case 4:
-                                ebi2=4;
-                                 break;
-                            case 6:
-                                ebi2=6;
-                                 break;
-                            default:
-                                legalbat2=0;
-                                 break;
-                            }
+                    if      (eb2=="1"){ebi2=1;}
+                    else if (eb2=="2"){ebi2=2;}
+                    else if (eb2=="3"){ebi2=3;}
+                    else if (eb2=="4"){ebi2=4;}
+                    else if (eb2=="6"){ebi2=6;}
+                    else {legalbat2=0;}
 
                     ceb2= rand()%5;
                         switch(ceb2)
@@ -2093,7 +1940,8 @@ cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t   1st Innings";
 cout<<"\n\n\n\t\t\t\t\t\t\t\t     "<<batting_1st<<" is now batting";
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
-int s1, w1, bc1, eb1, ebi1, ceb1,cebi1,over1,over1a,legalbat1,legalball1;
+int s1, w1, bc1, ebi1, cebi1,over1,over1a,legalbat1,legalball1;
+string eb1, ceb1;
 double crr1;
 s1=0;
 w1=0;
@@ -2134,51 +1982,19 @@ do
                     system("CLS");
                     system("color 0b");
 
-                    switch(eb1)
-                            {
-                            case 1:
-                                ebi1=1;
-                                break;
-                            case 2:
-                                ebi1=2;
-                                 break;
-                            case 3:
-                                ebi1=3;
-                                 break;
-                            case 4:
-                                ebi1=4;
-                                 break;
-                            case 6:
-                                ebi1=6;
-                                 break;
-                            default:
-                                legalbat1=0;
-                                 break;
-                            }
+                    if      (eb1=="1"){ebi1=1;}
+                    else if (eb1=="2"){ebi1=2;}
+                    else if (eb1=="3"){ebi1=3;}
+                    else if (eb1=="4"){ebi1=4;}
+                    else if (eb1=="6"){ebi1=6;}
+                    else {legalbat1=0;}
 
-                    switch(ceb1)
-                            {
-                                    case 1:
-                                        cebi1=1;
-                                         break;
-                                     case 2:
-                                        cebi1=2;
-                                         break;
-                                     case 3:
-                                        cebi1=3;
-                                         break;
-                                     case 4:
-                                        cebi1=4;
-                                         break;
-                                     case 6:
-                                        cebi1=6;
-                                         break;
-                                     default:
-                                        legalball1=0;
-                                        break;
-
-                            }
-
+                    if      (ceb1=="1"){cebi1=1;}
+                    else if (ceb1=="2"){cebi1=2;}
+                    else if (ceb1=="3"){cebi1=3;}
+                    else if (ceb1=="4"){cebi1=4;}
+                    else if (ceb1=="6"){cebi1=6;}
+                    else {legalball1=0;}
 
 
                     if((cebi1==ebi1 || legalbat1==0) && legalball1 != 0)
@@ -2249,7 +2065,8 @@ cout<<"\n\n\t\t\t\t\t\t  "<<bowling_1st<<" need "<<target<<" run(s) from 30 ball
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 getch();
 
-int s2, w2, bc2, eb2, ebi2, ceb2,cebi2,over2,over2a,legalbat2,legalball2;
+int s2, w2, bc2, ebi2, cebi2,over2,over2a,legalbat2,legalball2;
+string eb2, ceb2;
 double crr2, rrr;
 s2=0;
 w2=0;
@@ -2294,50 +2111,19 @@ do
                     system("CLS");
                     system("color 0b");
 
-                    switch(eb2)
-                            {
-                            case 1:
-                                ebi2=1;
-                                break;
-                            case 2:
-                                ebi2=2;
-                                 break;
-                            case 3:
-                                ebi2=3;
-                                 break;
-                            case 4:
-                                ebi2=4;
-                                 break;
-                            case 6:
-                                ebi2=6;
-                                 break;
-                            default:
-                                legalbat2=0;
-                                 break;
-                            }
+                    if      (eb2=="1"){ebi2=1;}
+                    else if (eb2=="2"){ebi2=2;}
+                    else if (eb2=="3"){ebi2=3;}
+                    else if (eb2=="4"){ebi2=4;}
+                    else if (eb2=="6"){ebi2=6;}
+                    else {legalbat2=0;}
 
-                    switch(ceb2)
-                            {
-                                    case 1:
-                                        cebi2=1;
-                                         break;
-                                     case 2:
-                                        cebi2=2;
-                                         break;
-                                     case 3:
-                                        cebi2=3;
-                                         break;
-                                     case 4:
-                                        cebi2=4;
-                                         break;
-                                     case 6:
-                                        cebi2=6;
-                                         break;
-                                     default:
-                                        legalball2=0;
-                                        break;
-
-                            }
+                    if      (ceb2=="1"){cebi2=1;}
+                    else if (ceb2=="2"){cebi2=2;}
+                    else if (ceb2=="3"){cebi2=3;}
+                    else if (ceb2=="4"){cebi2=4;}
+                    else if (ceb2=="6"){cebi2=6;}
+                    else {legalball2=0;}
 
 
 
@@ -2424,60 +2210,90 @@ void out(){
 
 system("color 0c");
 system("CLS");
+char c=219;
 
-cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@        @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@      @@@@        @@@@   @@@@@@@@@@@@@@     @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t    @@@@         @@@@    @@@@        @@@@        @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t     @@@@       @@@@     @@@@@      @@@@@        @@@@              \n";
-cout<<"\t\t\t\t\t\t      @@@@@@@@@@@@@       @@@@@@@@@@@@@@         @@@@          @@@@\n";
-cout<<"\t\t\t\t\t\t        @@@@@@@@@           @@@@@@@@@@           @@@@          @@@@\n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+cout<<"\t\t\t\t\t\t       "<<c<<c<<c<<c<<c<<c<<c<<c<<c<<"        "<<c<<c<<c<<c<<"        "<<c<<c<<c<<c<<"   "<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<"     "<<c<<c<<c<<c<<"\n";
+cout<<"\t\t\t\t\t\t     "<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<"      "<<c<<c<<c<<c<<"        "<<c<<c<<c<<c<<"   "<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<"     "<<c<<c<<c<<c<<"\n";
+cout<<"\t\t\t\t\t\t    "<<c<<c<<c<<c<<"       "<<c<<c<<c<<c<<"     "<<c<<c<<c<<c<<"        "<<c<<c<<c<<c<<"         "<<c<<c<<c<<c<<"           "<<c<<c<<c<<c<<"\n";
+cout<<"\t\t\t\t\t\t   "<<c<<c<<c<<c<<"         "<<c<<c<<c<<c<<"    "<<c<<c<<c<<c<<"        "<<c<<c<<c<<c<<"         "<<c<<c<<c<<c<<"           "<<c<<c<<c<<c<<"\n";
+cout<<"\t\t\t\t\t\t   "<<c<<c<<c<<c<<"         "<<c<<c<<c<<c<<"    "<<c<<c<<c<<c<<"        "<<c<<c<<c<<c<<"         "<<c<<c<<c<<c<<"           "<<c<<c<<c<<c<<"\n";
+cout<<"\t\t\t\t\t\t   "<<c<<c<<c<<c<<"         "<<c<<c<<c<<c<<"    "<<c<<c<<c<<c<<"        "<<c<<c<<c<<c<<"         "<<c<<c<<c<<c<<"           "<<c<<c<<c<<c<<"\n";
+cout<<"\t\t\t\t\t\t   "<<c<<c<<c<<c<<"         "<<c<<c<<c<<c<<"    "<<c<<c<<c<<c<<"        "<<c<<c<<c<<c<<"         "<<c<<c<<c<<c<<"           "<<c<<c<<c<<c<<"\n";
+cout<<"\t\t\t\t\t\t    "<<c<<c<<c<<c<<"       "<<c<<c<<c<<c<<"     "<<c<<c<<c<<c<<c<<"      "<<c<<c<<c<<c<<c<<"         "<<c<<c<<c<<c<<"              \n";
+cout<<"\t\t\t\t\t\t     "<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<"       "<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<"          "<<c<<c<<c<<c<<"           "<<c<<c<<c<<c<<"\n";
+cout<<"\t\t\t\t\t\t       "<<c<<c<<c<<c<<c<<c<<c<<c<<c<<"           "<<c<<c<<c<<c<<c<<c<<c<<c<<c<<c<<"            "<<c<<c<<c<<c<<"           "<<c<<c<<c<<c<<"\n";
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 
 }
 void four(){
 
 system("CLS");
 system("color 0a");
+char FILL = 219;
+
 cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"                                         @@@@@@@@@@@@@@@      @@@@@@@@@        @@@@        @@@@    @@@@@@@@@@@@@     \n";
-cout<<"                                         @@@@@@@@@@@@@@@    @@@@@@@@@@@@@      @@@@        @@@@    @@@@@@@@@@@@@@     \n";
-cout<<"                                         @@@@              @@@@       @@@@     @@@@        @@@@    @@@@       @@@@  \n";
-cout<<"                                         @@@@             @@@@         @@@@    @@@@        @@@@    @@@@       @@@@  \n";
-cout<<"                                         @@@@@@@@@@@      @@@@         @@@@    @@@@        @@@@    @@@@@@@@@@@@@@         \n";
-cout<<"                                         @@@@@@@@@@@      @@@@         @@@@    @@@@        @@@@    @@@@@@@@@@@@@        \n";
-cout<<"                                         @@@@             @@@@         @@@@    @@@@        @@@@    @@@@   @@@@      \n";
-cout<<"                                         @@@@              @@@@       @@@@     @@@@@      @@@@@    @@@@     @@@@     \n";
-cout<<"                                         @@@@               @@@@@@@@@@@@@       @@@@@@@@@@@@@@     @@@@      @@@@    \n";
-cout<<"                                         @@@@                 @@@@@@@@@           @@@@@@@@@@       @@@@       @@@@   \n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t                         "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t                         "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t                         "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t                         "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t                         "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t                         "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t                         "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t                         "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t                         "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
+
 }
 void six(){
 
 system("CLS");
 system("color 0e");
+
+char FILL = 219;
+
 cout<<"\n\n\n\n\n\n\n\n\n\n\n";
-cout<<"                                                           @@@@@@@@        @@@@      @@@@       @@@@   \n";
-cout<<"                                                         @@@@@@@@@@@@      @@@@       @@@@     @@@@    \n";
-cout<<"                                                        @@@@      @@@@     @@@@        @@@@   @@@@     \n";
-cout<<"                                                        @@@@               @@@@         @@@@ @@@@      \n";
-cout<<"                                                         @@@@@@@@@@@       @@@@          @@@@@@@       \n";
-cout<<"                                                           @@@@@@@@@@@     @@@@          @@@@@@@       \n";
-cout<<"                                                                   @@@@    @@@@         @@@@ @@@@      \n";
-cout<<"                                                        @@@@       @@@@    @@@@        @@@@   @@@@     \n";
-cout<<"                                                         @@@@@@@@@@@@      @@@@       @@@@     @@@@    \n";
-cout<<"                                                           @@@@@@@@        @@@@      @@@@       @@@@   \n";
-cout<<"\n\n\n\n\n\n\n\nPress any key to continue....";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"                 "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\t\t\t\t\t\t\t\t  "<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<FILL<<"\n";
+cout<<"\n\n\n\n\n\n\n\n\n\nPress any key to continue....";
 
 }
 void loading_screen(){
 
 system("CLS");
 Sleep(90);
+char BOX=254;
 for(int loop = 0; loop < 2; loop++)
             {
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
@@ -2544,5 +2360,3 @@ system("CLS");
              }
 
 }
-
-
