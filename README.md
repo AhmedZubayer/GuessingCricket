@@ -1,3 +1,5 @@
+DOWNLOAD: https://rebrand.ly/guessingcricket
+
                                           ╔═══════════════════════╗
                                           ║ Guessing Cricket v2.3 ║
                                           ╚═══════════════════════╝
