@@ -1,6 +1,6 @@
-                ╔═══════════════════════╗
-                ║ Guessing Cricket v2.3 ║
-                ╚═══════════════════════╝
+                                          ╔═══════════════════════╗
+                                          ║ Guessing Cricket v2.3 ║
+                                          ╚═══════════════════════╝
 
 Finger cricket, also known as Hand Cricket, is a classic childhood game that we used to play in classroom with friends. It involves two players using hand gestures to represent runs, taking turns to bat and bowl, and the game ends when the second player loses all their wickets or scores more run than the other player. The main objective is to score more runs than opponent, just like real cricket.
 
