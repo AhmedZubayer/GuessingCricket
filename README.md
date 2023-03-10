@@ -1,8 +1,5 @@
+![Guessing Cricket](https://raw.githubusercontent.com/ThisIsZubayer/thisiszubayer.github.io/main/guessingcricket/Logo.png)                          
 [![Download Guessing Cricket](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/guessing-cricket/files/latest/download)
-
-                                          ╔═══════════════════════╗
-                                          ║ Guessing Cricket v2.3 ║
-                                          ╚═══════════════════════╝
 
 Finger cricket, also known as Hand Cricket, is a classic childhood game that we used to play in classroom with friends. It involves two players using hand gestures to represent runs, taking turns to bat and bowl, and the game ends when the second player loses all their wickets or scores more run than the other player. The main objective is to score more runs than opponent, just like real cricket.
 
@@ -18,5 +15,6 @@ In conclusion, Guessing Cricket is a fun and modern twist on the traditional Fin
 
 As the developer of this game, I am Ahmed Zubayer, and I assure you that playing this game will be an amazing experience. Though it is based on a simple idea, I have been working on it for a long time, ever since I started coding in 2019 as a high school student. I have generated ideas and researched on the internet to implement the syntax and techniques. Through this process, I have learned a lot of things, from clearing the console screen to coloring texts and even adding animations! My ultimate goal is to transform a simple black and white console screen into a colorful environment for the users but using only codes. Whole process accelerated when I started using ChatGPT, an AI chat engine by OpenAI, which helped me to learn things and resolve the issues. It proved to me that AI can be a powerful tool to enhance productivity instead of being a job deleter! Imagination is only the limit now! I am always open to new ideas. So, join me and get ready for an exciting ride!
 
-            HAPPY GAMING!     :)
+HAPPY GAMING!     :)
 
+</center>
