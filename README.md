@@ -1,4 +1,4 @@
-DOWNLOAD: https://rebrand.ly/guessingcricket
+[![Download Guessing Cricket](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/guessing-cricket/files/latest/download)
 
                                           ╔═══════════════════════╗
                                           ║ Guessing Cricket v2.3 ║
