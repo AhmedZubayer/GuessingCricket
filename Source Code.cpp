@@ -1,20 +1,14 @@
 /*
-Guessing Cricket....v2.3
+Guessing Cricket....v3.0
 
-[Last update of this version: March 04, 2023]
+[Last update of this version: November 24, 2023]
 
 Updates:
-1.  Global variables instead of local variables.
-2.  Simplified the whole program for different levels using a global variable.
-3.  Multicolor console.
-4.  Fixed the link of Github Repository in About section.
-5.  Added new feature: Update Checker.
-6.  Excluded unnecessary parts of <Windows.h> header to run the program faster.
-7.  Added new animated flipping coin toss screen.
-8.  Modified UI of About, How to play and Introductory Screen.
-9.  Easier navigation. Nothing will happen if user presses the wrong key.
-10. Player will be able to pause the game anytime and return to the previous screen in the game menus.
+-Added Background Music
+-Basic Color fix
 */
+
+/*****************SEE YOU IN 2024!***************/
 
 #include<iostream>
 #include<conio.h>
@@ -22,13 +16,11 @@ Updates:
 #include<iomanip>
 #include<chrono>
 #include<string>
-
-//Excluding unnecessary parts of <Windows.h> header.
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-
 #include<Windows.h>
+#include <mmsystem.h>                                      //For Musics
+
+#pragma comment(lib, "winmm.lib")                     //For Music
+
 
 using namespace std;
 
@@ -157,7 +149,7 @@ system("color a");
 ShowConsoleCursor(false);
 
 
-cout<<R"(                                                                                                                                                                    )"<<"\033[38;2;90;90;90mv2.3\033[38;2;0;255;0m"<<R"(
+cout<<R"(                                                                                                                                                                    )"<<"\033[38;2;90;90;90mv3.0\033[38;2;0;255;0m"<<R"(
 
                                   þþþþþþþþ    þþþþ    þþþþ   þþþþþþþþ     þþþþþþ      þþþþþþ   þþþþ   þþþþþ      þþþþ       þþþþþþþþ
                                þþþþþþþþþþþ    þþþþ    þþþþ   þþþþþþþþ   þþþþþþþþ    þþþþþþþþ   þþþþ   þþþþþþ     þþþþ    þþþþþþþþþþþ
@@ -193,10 +185,13 @@ intro_menu();
 }
 void intro_menu(){
 ShowConsoleCursor(false);
+PlaySound(TEXT("Audio/intro.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NOSTOP);
+
 cout<<"\t\t\t\t\t\t\t\t\033[38;2;224;7;72m  [Enter the number of each command]\n\n\n";
 cout<<"\t\t\t\t\t\t\t\t\t\033[38;2;0;255;255m  (1) Start game\n\t\t\t\t\t\t\t\t\t  (2) How to play\n\t\t\t\t\t\t\t\t\t  (3) About this game\n\t\t\t\t\t\t\t\t\t  (4) Check for update\n\t\t\t\t\t\t\t\t\t  (5) Quit Game\n\n";
 intro_input:
 char introinput = getch();
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
 if      (introinput=='1'){game_mode();}
 else if (introinput=='2'){howto();}
 else if (introinput=='3'){about();}
@@ -208,10 +203,11 @@ void game_mode(){
 
 ShowConsoleCursor(false);system("CLS");
 system("color e");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\tSelect game mode\n";
-cout<<"\n\n\n\t\t\t\t\t\t\t\t\033[38;2;99;166;247m     (1) Single Player Mode\n\n\t\t\t\t\t\t\t\t     (2) Multiplayer Mode\n\n\n";
+cout<<"\033[38;2;255;230;0m\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\tSelect game mode\n";
+cout<<"\n\n\n\t\t\t\t\t\t\t\t\033[38;2;0;255;170m     (1) Single Player Mode\n\n\t\t\t\t\t\t\t\t     (2) Multiplayer Mode\n\n\n";
 gamemode_select:
 char gamemode_selection = getch();
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
 if(gamemode_selection == '1'){lvl_selection();}
 else if(gamemode_selection == '2'){twoplayer_mode();}
 else if(gamemode_selection == 27){intro();}
@@ -266,6 +262,7 @@ cout<<"\033[38;2;179;237;31m"<<R"(
 )"<<"\033[38;2;255;255;0m"<<R"(
 Press ENTER to continue....        )";
 getch();
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
 intro();
 }
 void about(){
@@ -277,11 +274,11 @@ COORD size = {170, 45};
 SetConsoleScreenBufferSize(hConsole, size);
 SMALL_RECT window = {0, 0, size.X - 1, size.Y - 1};
 SetConsoleWindowInfo(hConsole, TRUE, &window);
-system("color e");
+cout<<"\033[38;2;255;230;0m";
 
 cout << R"(
                                                                        ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
-                                                                       º Guessing Cricket v2.3 º
+                                                                       º Guessing Cricket v3.0 º
                                                                        ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
 
          Finger cricket, also known as Hand Cricket, is a classic childhood game that we used to play in classroom with friends. It involves two players using
@@ -330,6 +327,7 @@ WriteConsoleW(hConsole, &wcCircle, 1, &dwBytesWritten, NULL);
 cout << " \033[48;2;0;0;0m\033[38;2;255;255;0m";
 cout<<"\nPress ENTER to continue....";
 gnrl_inp = getch();
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
 if(gnrl_inp == 27){intro();}
 system("CLS");
 system("color f");
@@ -386,8 +384,8 @@ intro();
 }
 void update(){
 system("CLS");
-system("title GUESSING CRICKET --------------> VERSION: 2.3");
-cout<<"\n\n\n\n\n\n\n\n\n\n     Game Version: 2.3                                                                                                             Version Released: March 04, 2023\n\n\n\n\n\t\t\t\t\t\t\t\t       Your game version is: \033[38;2;210;0;0m\033[48;2;250;250;0m 2.3 \033[48;2;0;0;0m\n\n\n\t\t\t\t\t\t\t          \033[38;2;255;255;0mPress ENTER to check latest version...";
+system("title GUESSING CRICKET --------------> VERSION: 3.0");
+cout<<"\n\n\n\n\n\n\n\n\n\n     Game Version: 3.0                                                                                                          Version Released: November 24, 2023\n\n\n\n\n\t\t\t\t\t\t\t\t       Your game version is: \033[38;2;210;0;0m\033[48;2;250;250;0m 3.0 \033[48;2;0;0;0m\n\n\n\t\t\t\t\t\t\t          \033[38;2;255;255;0mPress ENTER to check latest version...";
 cout<<"\033[38;2;250;90;0m"<<R"(
 
 
@@ -401,10 +399,12 @@ cout<<"\033[38;2;250;90;0m"<<R"(
             v2.1.2 ----> Upgraded the visuals of the entire game
             v2.2   ----> Simple input without requiring to press enter everytime
             v2.3   ----> Easier navigation, Allowed to pause, Multicolor Screen, Added new feature: Update Checker
+            v3.0   ----> Added new feature: Musics and sound effects
 
     ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 )";
 gnrl_inp = getch();
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
 if(gnrl_inp == 27){intro();}
 system("start https://github.com/ThisIsZubayer/GuessingCricket/releases/latest ");
 system("title GUESSING CRICKET");
@@ -416,6 +416,7 @@ system("CLS");
 system("color 0c");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tAre you sure to quit this game?\n\n\n\t\t\t\t\t\t\t\tPress 'y' for Yes or 'n' for No\n\n";
 char quit1 = getch();
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
 if (quit1=='y' || quit1=='Y')
         {   system("CLS");
             system("color 0c");
@@ -432,10 +433,12 @@ void lvl_selection(){
 ShowConsoleCursor(false);
 system("CLS");
 system("color e");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t Select difficulty\n";
-cout<<"\n\n\n\t\t\t\t\t\t\t     \033[38;2;135;45;252m    (1) Easy [Opponent Level: Noob]\n\n\t\t\t\t\t\t\t         (2) Medium [Opponent Level: Pro]\n\n\t\t\t\t\t\t\t         (3) Hard [Opponent Level: Master]\n\n\n";
+cout<<"\033[38;2;255;230;0m\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t Select difficulty\n";
+cout<<"\n\n\n\t\t\t\t\t\t\t     \033[38;2;0;255;0m    (1) Easy [Opponent Level: Noob]\n\n\t\t\t\t\t\t\t         (2) Medium [Opponent Level: Pro]\n\n\t\t\t\t\t\t\t         (3) Hard [Opponent Level: Master]\n\n\n";
 lvl_select:
 char level_selection = getch();
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+
 if     (level_selection == '1'){game_lvl=1;  toss();}
 else if(level_selection == '2'){game_lvl=2;  toss();}
 else if(level_selection == '3'){game_lvl=3;  toss();}
@@ -444,14 +447,18 @@ else{goto lvl_select;}
 }
 void toss(){
 ShowConsoleCursor(false);
-
 system("CLS");
 system("color 0d");
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t         TOSS\n";
+cout<<"\033[38;2;0;120;255m\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t         TOSS\n";
 cout<< "\n\n\n\t\t\t\t\t\t\t            Choose between Head and Tail\n";
 cout<< "\n\n\n\t\t\t\t\t\t\t           Type H for head and T for tail. \n\n\t\t\t\t\t\t\t                You are choosing...";
 toss_inp:
 char player_toss = getch();
+
+sndPlaySound(NULL, SND_ASYNC | SND_PURGE);             //STOPS ALL MUSIC
+
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+
 char toss_result;
 string toss_result_declare;
 player_toss=toupper(player_toss);
@@ -472,6 +479,8 @@ system("color 0d");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t   "<<toss_result_declare<<" is up! Choose between batting and bowling...\n\n\t\t\t\t\t\t\t       Type '1' for batting and '2' for bowling\n\n\t\t\t\t\t\t\t\t\tYou are choosing.... ";
 choose_inp:
 char player_choose = getch();
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+
 if      (player_choose == '1'){
 batting_1st();}
 else if (player_choose == '2'){
@@ -485,6 +494,8 @@ system("CLS");
 system("color 0d");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t   Sorry, "<<toss_result_declare<<" is up! Let computer choose between batting and bowling\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress ENTER to continue....";
 gnrl_inp = getch();
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+
 if(gnrl_inp == 27){pause(); goto label3;}
 int computer_decision;
 string comp_chose;
@@ -496,6 +507,8 @@ system("CLS");
 system("color 0d");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bat first\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress ENTER to continue....\n";
 gnrl_inp = getch();
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+
 if(gnrl_inp == 27){pause(); goto label4;}
 bowling_1st();
 }
@@ -505,6 +518,8 @@ system("CLS");
 system("color 0d");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Computer has chosen to bowl first\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress ENTER to continue....\n";
 gnrl_inp = getch();
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+
 if(gnrl_inp == 27){pause(); goto label5;}
 batting_1st();
 }
@@ -526,7 +541,9 @@ system("color 0b");
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t   1st Innings";
 cout<<"\n\n\n\t\t\t\t\t\t\t\t       You are now batting";
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress ENTER to continue....";
-gnrl_inp = getch();
+gnrl_inp =
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+
 if(gnrl_inp == 27){pause();goto label6;}
 
 
@@ -570,6 +587,8 @@ do
 						if(cebi1==ebi1 || legalbat1==0)
 						{
 							w1 = w1+1;
+
+							if(eb1==6){PlaySound(TEXT("Audio/caught.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}else{PlaySound(TEXT("Audio/bowled.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}
 							out();
 						}
 
@@ -582,7 +601,9 @@ do
 							else if (ebi1==6)
 								{six();}
 							else
-							{cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress ENTER to continue....";}
+							{
+							    PlaySound(TEXT("Audio/bat.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+                                cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress ENTER to continue....";}
 
 						}
 
@@ -613,7 +634,9 @@ do
 
 						if(cebi1==ebi1 || legalbat1==0)
 						{
+
 						     w1 = w1+1;
+							 if(eb1==6){PlaySound(TEXT("Audio/caught.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}else{PlaySound(TEXT("Audio/bowled.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}
 							 out();
 						}
 						else
@@ -623,7 +646,8 @@ do
 
 							 if       (ebi1==4){four();}
 							 else if  (ebi1==6){six();}
-							 else     {cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress ENTER to continue....";}
+							 else     {PlaySound(TEXT("Audio/bat.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+                                        cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress ENTER to continue....";}
 						}
 
                     }
@@ -672,6 +696,7 @@ do
 
 						if(cebi1==ebi1 || cebi11 ==ebi1 || legalbat1==0)
 						{   w1 = w1+1;
+							if(eb1==6){PlaySound(TEXT("Audio/caught.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}else{PlaySound(TEXT("Audio/bowled.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}
 							out();
 						}
 						else
@@ -684,7 +709,8 @@ do
 							else if (ebi1==6)
 								{six();}
 							else
-							{cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress ENTER to continue....";}
+							{PlaySound(TEXT("Audio/bat.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+                            cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi1<<" in this ball\n\n\n\nPress ENTER to continue....";}
 						}
                     }
 						getch();
@@ -775,7 +801,9 @@ do {                label9:
 
 
                     if(cebi2==ebi2)
-                    {   w2=w2+1;
+                    {
+                        w2=w2+1;
+                        if(ebi2==6){PlaySound(TEXT("Audio/caught.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}else{PlaySound(TEXT("Audio/bowled.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}
                         out();
                         getch();
                         bc2++;
@@ -796,7 +824,8 @@ do {                label9:
                         else if (cebi2==6)
                             {six();}
                         else
-                        {cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi2<<" in this ball\n\n\n\nPress ENTER to continue....";}
+                        {   PlaySound(TEXT("Audio/bat.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+                            cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi2<<" in this ball\n\n\n\nPress ENTER to continue....";}
 
                         getch();
 
@@ -805,7 +834,7 @@ do {                label9:
             }while(bc2<30 && w2<3 && t1>s2);
 
 /** End of the match & result declaration  **/
-
+PlaySound(TEXT("Audio/scorecard.wav"), NULL, SND_FILENAME | SND_ASYNC);
 //Screen-1
 label10:
 system("CLS");
@@ -912,6 +941,7 @@ do{
 
                     if(cebi1==ebi1)
                     {   w1=w1+1;
+                        if(ebi1==6){PlaySound(TEXT("Audio/caught.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}else{PlaySound(TEXT("Audio/bowled.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}
                         system("color 0c");
                         system("CLS");
 						out();
@@ -936,7 +966,8 @@ do{
                         else if (cebi1==6)
                             {six();}
                         else
-                        {cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi1<<" in this ball\n\n\n\nPress ENTER to continue....";}
+                        {PlaySound(TEXT("Audio/bat.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+                            cout<< "\n\n\n\t\t\t\tComputer has scored "<<cebi1<<" in this ball\n\n\n\nPress ENTER to continue....";}
 
                         getch();
 
@@ -1013,6 +1044,7 @@ do{
 
 						if(cebi2==ebi2 || legalbat2==0)
 						{   w2 = w2+1;
+							if(eb2==6){PlaySound(TEXT("Audio/caught.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}else{PlaySound(TEXT("Audio/bowled.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}
 							out();
 
 						}
@@ -1027,7 +1059,8 @@ do{
 								{six();}
 							else
 							{
-								cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi2<<" in this ball\n\n\n\nPress ENTER to continue....";
+								PlaySound(TEXT("Audio/bat.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+                                 cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi2<<" in this ball\n\n\n\nPress ENTER to continue....";
 							}
 
 						}
@@ -1059,6 +1092,7 @@ do{
 
 						if(cebi2==ebi2 || legalbat2==0)
 						{   w2 = w2+1;
+							if(eb2==6){PlaySound(TEXT("Audio/caught.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}else{PlaySound(TEXT("Audio/bowled.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}
 							out();
 						}
 						else
@@ -1071,7 +1105,8 @@ do{
 							else if (ebi2==6)
 								{six();}
 							else
-							{cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi2<<" in this ball\n\n\n\nPress ENTER to continue....";}
+							{PlaySound(TEXT("Audio/bat.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+                             cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi2<<" in this ball\n\n\n\nPress ENTER to continue....";}
 
 
 						}
@@ -1122,6 +1157,7 @@ do{
 
 						if(cebi2==ebi2 || cebi24==ebi2 || legalbat2==0)
 						{   w2 = w2+1;
+							if(eb2==6){PlaySound(TEXT("Audio/caught.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}else{PlaySound(TEXT("Audio/bowled.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}
 							out();
 						}
 						else
@@ -1134,7 +1170,8 @@ do{
 							else if (ebi2==6)
 								{six();}
 							else
-							{cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi2<<" in this ball\n\n\n\nPress ENTER to continue....";}
+							{PlaySound(TEXT("Audio/bat.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+							    cout<< "\n\n\n\t\t\t\tYou have scored "<<ebi2<<" in this ball\n\n\n\nPress ENTER to continue....";}
 						}
                     }
 
@@ -1151,6 +1188,8 @@ over2=bc2 / 6;
 over2a = bc2 %6;
 
 /** End of the match & result declaration  **/
+
+PlaySound(TEXT("Audio/scorecard.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
 //Screen-1
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t       End of the 2nd Innings";
@@ -1209,6 +1248,7 @@ while (true) {
         }
     }
 name_1 += "\033[38;2;255;0;255m";
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
 cout<<"\033[38;2;255;0;255m\n\n\t\t\t\t\t\t\t\tEnter name of Player 2: \033[38;2;252;111;3m";
 while (true) {
         char c = getch();
@@ -1228,7 +1268,7 @@ while (true) {
         }
     }
 name_2 += "\033[38;2;255;0;255m";
-
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
 //Two Player Mode: Toss
 label31:
 system("CLS");
@@ -1238,6 +1278,7 @@ cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 cout<<setw(100)<<"Computer will decide who is going to call";
 cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress ENTER to continue....";
 gnrl_inp = getch();
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
 if(gnrl_inp == 27){pause(); goto label30;}
 loading_screen();
 system("CLS");
@@ -1255,6 +1296,7 @@ if (two_player_toss_caller_decider == 0){
     cout<<"\t\t\t\t\t\t\t\t\t"<<name_1<<", you will call!";
     cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress ENTER to continue....";
     gnrl_inp = getch();
+    PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
     if(gnrl_inp == 27){pause(); goto label31;}
     system("CLS");
     system("color 0d");
@@ -1263,6 +1305,7 @@ if (two_player_toss_caller_decider == 0){
     cout<< "\n\n\n\t\t\t\t\t\t\t             Type H for head and T for tail \n\t\t\t\t\t\t\t\t           You are choosing...";
 label32:
 player_1_choose = getch();
+PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
 system("CLS");
 system("color 0d");
 
@@ -1294,6 +1337,7 @@ system("color 0d");
     cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\nPress ENTER to continue....";
 
     getch();
+    PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
 
     system("CLS");
     system("color 0d");
@@ -1302,6 +1346,7 @@ system("color 0d");
     cout<< "\n\n\n\t\t\t\t\t\t\t             Type H for head and T for tail \n\n\n\t\t\t\t\t\t\t\t           You are choosing...";
     label33:
     player_2_choose = getch();
+    PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
     system("CLS");
     system("color 0d");
     player_2_choose=toupper(player_2_choose);
@@ -1333,6 +1378,7 @@ system("cls");
 system("color 0d");
             cout<<"\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t               "<< toss_result_declare<<" is up!\n\n\n\n\t\t\t\t\t\t\t\t"<<toss_winner<<", choose between batting and bowling...\n\n\t\t\t\t\t\t\t\tType '1' for batting and '2' for bowling\n\n\t\t\t\t\t\t\t\t\tYou are choosing.... ";
             char toss_winner_choose_to = getch();
+            PlaySound(TEXT("Audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
             if (toss_winner_choose_to == '1'){
             batting_1st = toss_winner;
             bowling_1st = toss_loser;
@@ -1425,6 +1471,8 @@ do
                     if((cebi1==ebi1 || legalbat1==0) && legalball1 != 0)
                     {   w1 = w1+1;
                         bc1++;
+                        if(ebi1==6){PlaySound(TEXT("Audio/caught.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}else{PlaySound(TEXT("Audio/bowled.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}
+
                         out();
                         getch();
                     }
@@ -1443,6 +1491,7 @@ do
                             six();
                         }
                         else{
+                        PlaySound(TEXT("Audio/bat.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
                         cout<< "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t"<<batting_1st<<" has scored "<<ebi1<<" in this ball\n\n\n\n\n\n\nPress ENTER to continue....";
                         }
 
@@ -1564,6 +1613,7 @@ do
                     if((cebi2==ebi2 || legalbat2==0) && legalball2 != 0)
                     {   w2 = w2+1;
                         bc2++;
+                       if(ebi2==6){PlaySound(TEXT("Audio/caught.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}else{PlaySound(TEXT("Audio/bowled.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);}
                        out();
                         getch();
                     }
@@ -1572,7 +1622,7 @@ do
                     {
                         s2 = s2+ebi2;
                         bc2++;
-if(ebi2 == 4)
+                        if(ebi2 == 4)
                         {
 four();
 
@@ -1583,6 +1633,7 @@ six();
 
                             }
                         else{
+                        PlaySound(TEXT("Audio/bat.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
                         cout<< "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t"<<bowling_1st<<" has scored "<<ebi2<<" in this ball\n\n\n\n\n\n\nPress ENTER to continue....";
                         }
 
@@ -1605,6 +1656,8 @@ six();
 
 
                 }   while(bc2<30 && w2 < 3 && target > s2);
+
+PlaySound(TEXT("Audio/scorecard.wav"), NULL, SND_FILENAME | SND_ASYNC);
 label44:
 system("CLS");
 system("color 0b");
@@ -1647,7 +1700,7 @@ void out(){
 system("color 0c");
 system("CLS");
 ShowConsoleCursor(false);
-cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\033[38;2;255;0;0m";
 cout<<R"(
                                                         ÛÛÛÛÛÛÛ         ÛÛÛÛ         ÛÛÛÛ   ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ     ÛÛÛÛ
                                                      ÛÛÛÛÛÛÛÛÛÛÛÛÛ      ÛÛÛÛ         ÛÛÛÛ   ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ     ÛÛÛÛ
@@ -1667,7 +1720,9 @@ void four(){
 system("CLS");
 system("color 0a");
 ShowConsoleCursor(false);
-cout<<"\n\n\n\n\n\n\n\n\n\n";
+PlaySound(TEXT("Audio/four.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+
+cout<<"\033[38;2;255;0;200m\n\n\n\n\n\n\n\n\n\n";
 cout<<R"(
                                                                   ÛÛÛÛÛÛ                 ÛÛÛÛÛÛ
                                                                   ÛÛÛÛÛÛ                 ÛÛÛÛÛÛ
@@ -1690,15 +1745,17 @@ cout<<R"(
                                                                                          ÛÛÛÛÛÛ
                                                                                          ÛÛÛÛÛÛ
                                                                                          ÛÛÛÛÛÛ              )";
+Sleep(4000);
 cout<<"\n\n\n\n\n\n\n\n\n\nPress ENTER to continue....";
 
 }
 void six(){
 
+PlaySound(TEXT("Audio/six.wav"), NULL, SND_FILENAME | SND_ASYNC);
 system("CLS");
 system("color 0e");
 ShowConsoleCursor(false);
-cout<<"\n\n\n\n\n\n\n\n\n\n";
+cout<<"\n\n\n\n\n\n\n\n\n\n\033[38;2;252;111;3m";
 cout<<R"(
                                                                   ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
                                                                   ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
@@ -1721,7 +1778,8 @@ cout<<R"(
                                                                   ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
                                                                   ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
                                                                   ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ              )";
-cout<<"\n\n\n\n\n\n\n\n\n\nPress ENTER to continue....";
+Sleep(4000);
+cout<<"\n\n\n\n\n\n\n\n\n\n\033[38;2;255;0;255mPress ENTER to continue....";
 
 }
 void loading_screen(){
@@ -1795,6 +1853,8 @@ system("CLS");
 }
 void flipping_coin(){
 ShowConsoleCursor(false);
+PlaySound(TEXT("Audio/coin.wav"), NULL, SND_FILENAME | SND_ASYNC);
+
 cout<<"\033[38;2;150;125;10m";
 for (int i=0;i<3;i++)
                                                                      {
