@@ -1,4 +1,4 @@
-![Guessing Cricket](https://raw.githubusercontent.com/ThisIsZubayer/thisiszubayer.github.io/main/guessingcricket/Logo.png)                          
+![Guessing Cricket](https://raw.githubusercontent.com/ThisIsZubayer/thisiszubayer.github.io/main/guessingcricket/Logo.png | width=100)                          
 [![Download Guessing Cricket](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/guessing-cricket/files/latest/download)
 
 Finger cricket, also known as Hand Cricket, is a classic childhood game that we used to play in classroom with friends. It involves two players using hand gestures to represent runs, taking turns to bat and bowl, and the game ends when the second player loses all their wickets or scores more run than the other player. The main objective is to score more runs than opponent, just like real cricket.
