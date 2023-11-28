@@ -11,7 +11,7 @@ Unlike Finger Cricket, where players need coordination and quick mental math ski
 
 In conclusion, Guessing Cricket is a fun and modern twist on the traditional Finger Cricket game. With its innovative gameplay and features, players can enjoy an exciting and challenging experience, whether playing against the computer or another human player. So, gather your friends or family and enjoy Guessing Cricket today!
 
-═══════════════════════════════════════════════════════════════════════
+
 
 As the developer of this game, I am Ahmed Zubayer, and I assure you that playing this game will be an amazing experience. Though it is based on a simple idea, I have been working on it for a long time, ever since I started coding in 2019 as a high school student. I have generated ideas and researched on the internet to implement the syntax and techniques. Through this process, I have learned a lot of things, from clearing the console screen to coloring texts, adding ascii based animations and even background sound effects! My ultimate goal is to transform a simple black and white console screen into a colorful environment for the users. Whole process accelerated when I started using AI. It helped me to learn things and resolve the issues faster than ever! Imagination is only the limit now! 
 
@@ -23,4 +23,4 @@ HAPPY GAMING!     :)
 
 
 This repository is licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 4.0 International Public License. 
-[CC BY-NC-ND](LICENSE.md)
+[![CC BY-NC-ND](https://img.shields.io/badge/license-CC_NC-ND-4.0-blue.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
