@@ -22,4 +22,5 @@ HAPPY GAMING!     :)
 </center>
 
 
-<p>This repository is licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 4.0 International Public License. [CC BY-NC-ND](LICENSE.md)</p>
+This repository is licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 4.0 International Public License. 
+[CC BY-NC-ND](LICENSE.md)
