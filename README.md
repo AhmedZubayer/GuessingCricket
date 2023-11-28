@@ -23,4 +23,4 @@ HAPPY GAMING!     :)
 
 
 This repository is licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 4.0 International Public License. 
-[![CC BY-NC-ND](https://img.shields.io/badge/license-CC_NC-ND-4.0-blue.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+[![License: CC BY-NC-ND 4.0](https://licensebuttons.net/l/by-nc-nd/4.0/80x15.png)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
