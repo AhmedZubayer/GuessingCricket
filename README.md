@@ -20,3 +20,6 @@ I am always open to new ideas. So, join me and get ready for an exciting ride!
 HAPPY GAMING!     :)
 
 </center>
+
+
+<p>This repository is licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 4.0 International Public License.</p>
